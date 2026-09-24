@@ -7,7 +7,7 @@ const format=a=>Number(a.toFixed(3))+'°';
 async function start(){
  const response=await fetch('./assets/atlas.json');if(!response.ok)throw Error('The sphere data could not be loaded. Please reload the page.');
  const atlas=await response.json(),renderer=createRenderer(atlas),states=[],cache=new Map(),queue=[];
- let running=false,completed=0;
+ let running=false;
  async function load(state){
   if(state.pixels){cache.delete(state);cache.set(state,true);return;}
   const bytes=Uint8Array.from(atob(state.variant.data),c=>c.charCodeAt(0));
@@ -19,15 +19,14 @@ async function start(){
  async function pump(){
   if(running)return;running=true;
   while(queue.length){
-   const state=queue.shift();
-   try{await load(state);renderer.render(state,state.canvas,options);if(!state.drawn){state.drawn=true;completed++;}state.canvas.setAttribute('aria-busy','false');}
+   const state=queue.shift();if(!state.visible)continue;
+   try{await load(state);if(!state.visible)continue;renderer.render(state,state.canvas,options);state.canvas.style.opacity='1';state.drawn=true;state.canvas.setAttribute('aria-busy','false');}
    catch(error){state.card.querySelector('.detail').textContent=error.message;state.card.querySelector('.detail').classList.add('error');console.error(error);}
-   if(completed===states.length)status.textContent='';
    await new Promise(requestAnimationFrame);
   }
   running=false;
  }
- function schedule(state,priority=false){const i=queue.indexOf(state);if(i>=0)queue.splice(i,1);if(priority)queue.unshift(state);else queue.push(state);void pump();}
+ function schedule(state,priority=false){if(!state.visible)return;const i=queue.indexOf(state);if(i>=0)queue.splice(i,1);if(priority)queue.unshift(state);else queue.push(state);void pump();}
  function select(state,group,piece=null){
   state.selected=state.selected===group?-1:group;
   state.card.querySelectorAll('.legend button').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===state.selected)));
@@ -40,11 +39,11 @@ async function start(){
  function rotate(state,axis,angle){state.q=norm(mul(axisQ(axis,angle),state.q));schedule(state,true);}
  for(const card of document.querySelectorAll('.puzzle')){
   const family=atlas.families[Number(card.dataset.family)],variant=family.variants[Number(card.dataset.variant)],canvas=card.querySelector('canvas');
-  const masks=new Int32Array(64),fallback=new Int32Array(128),classes=new Int32Array(64),fullAxes=family.axes.map(u=>u.slice());masks.fill(-1);
+  const masks=new Uint32Array(variant.count+1),fallback=new Int32Array(2**family.axes.length),classes=new Int32Array(variant.count+1),fullAxes=family.axes.map(u=>u.slice());masks.fill(-1);
   variant.pieces.forEach((p,i)=>{masks[i+1]=p.mask;if(!fallback[p.mask])fallback[p.mask]=i+1;});
   variant.orbits.forEach((group,i)=>group.forEach(j=>classes[j+1]=i));
   if(variant.angle===90)family.axes.forEach(u=>{const v=u.map(x=>-x);if(!fullAxes.some(w=>Math.hypot(...w.map((x,i)=>x-v[i]))<1e-6))fullAxes.push(v);});
-  const state={card,canvas,family,variant,masks,fallback,classes,fullAxes,cut:Math.cos(variant.angle*Math.PI/180),q:defaultQ(),zoom:1,selected:-1,pixels:null,drawn:false};
+  const state={card,canvas,family,variant,masks,fallback,classes,fullAxes,cut:Math.cos(variant.angle*Math.PI/180),q:defaultQ(),zoom:1,selected:-1,pixels:null,drawn:false,visible:false};
   states.push(state);canvas.setAttribute('aria-busy','true');
   const legend=card.querySelector('.legend');
   variant.orbits.forEach((group,i)=>{const button=document.createElement('button');button.type='button';button.style.setProperty('--color',rgb(colors[i]));button.innerHTML=`<i aria-hidden="true"></i><span>${group.length}</span>`;button.setAttribute('aria-label',`Class ${i+1}: ${group.length} ${group.length===1?'piece':'pieces'}, ${group.map(j=>'P'+(j+1)).join(', ')}`);button.setAttribute('aria-pressed','false');button.title=`Class ${i+1} · ${group.map(j=>'P'+(j+1)).join(', ')}`;button.addEventListener('click',()=>select(state,i));legend.append(button);});
@@ -66,8 +65,8 @@ async function start(){
  // All cards are present and painted, not selected through a menu. Prioritize
  // the viewport so an anchor jump never waits for earlier offscreen cards.
  const byCard=new Map(states.map(s=>[s.card,s]));
- const visible=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting)schedule(byCard.get(entry.target),true);},{rootMargin:'300px'});
- states.forEach(s=>{visible.observe(s.card);schedule(s);});
+ const visible=new IntersectionObserver(entries=>{for(const entry of entries){const state=byCard.get(entry.target);state.visible=entry.isIntersecting;if(state.visible)schedule(state,true);else{state.canvas.style.opacity='0';state.canvas.width=state.canvas.height=1;}}},{rootMargin:'450px'});
+ states.forEach(s=>visible.observe(s.card));status.textContent='';
  for(const [id,key] of [['show-axes','axes'],['show-numbers','numbers']])document.getElementById(id).addEventListener('change',e=>{options[key]=e.target.checked;states.forEach(s=>schedule(s));});
  let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>states.forEach(s=>schedule(s)),160);});
  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>states.forEach(s=>schedule(s)));

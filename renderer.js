@@ -8,7 +8,7 @@ export const applyQ=(q,v)=>{const t=cross(q,v).map(x=>2*x),c=cross(q,t);return v
 export const inverse=q=>[-q[0],-q[1],-q[2],q[3]];
 export const defaultQ=()=>norm(mul(axisQ([1,0,0],-.55),axisQ([0,1,0],.68)));
 function hsl(h,s,l){const a=s*Math.min(l,1-l),f=n=>{const k=(n+h/30)%12;return l-a*Math.max(-1,Math.min(k-3,9-k,1));};return[f(0),f(8),f(4)];}
-export const colors=Array.from({length:64},(_,i)=>hsl((211+i*137.507764)%360,.61+(i%4)*.055,.58+(((i*3)%5)-2)*.04));
+export const colors=Array.from({length:256},(_,i)=>hsl((211+i*137.507764)%360,.61+(i%4)*.055,.58+(((i*3)%5)-2)*.04));
 export const rgb=(c,a=1)=>`rgba(${c.map(x=>Math.round(x*255)).join(',')},${a})`;
 export function pieceAt(state,world,atlas){
  const {family,variant,pixels,masks,fallback}=state;
@@ -19,16 +19,18 @@ export function pieceAt(state,world,atlas){
 }
 export function worldAt(state,x,y,w,h){const r=Math.min(w,h)*.423*state.zoom,a=(x-w/2)/r,b=(h/2-y)/r;if(a*a+b*b>1)return null;return applyQ(inverse(state.q),[a,b,Math.sqrt(Math.max(0,1-a*a-b*b))]);}
 export function createRenderer(atlas){
- const surface=document.createElement('canvas');let gl=surface.getContext('webgl2',{alpha:true,antialias:true,premultipliedAlpha:false});let program,texture;const uniforms={};let lastState=null;
+ const surface=document.createElement('canvas');let gl=surface.getContext('webgl2',{alpha:true,antialias:true,premultipliedAlpha:false});let program,texture,maskTexture,colorTexture;const uniforms={};let lastState=null;
  function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;}
  if(gl){try{program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,`#version 300 es
  void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);gl_Position=vec4(p*2.0-1.0,0.0,1.0);}`));
  gl.attachShader(program,shader(gl.FRAGMENT_SHADER,`#version 300 es
       precision highp float; precision highp int; precision highp usampler2D;
       uniform vec2 uSize;uniform float uRadius;uniform mat3 uCamera;uniform usampler2D uAtlas;
-      uniform int uCount,uSelected,uMasks[64],uFallback[128];uniform vec3 uAxes[7],uColors[64],uInk;
+      uniform int uCount,uPieces;uniform vec3 uAxes[12],uInk;
+      uniform usampler2D uMasks;uniform sampler2D uColors;
       uniform float uCut,uAngle;out vec4 outColor;
       int sampleId(ivec2 p,ivec2 size){return int(texelFetch(uAtlas,ivec2((p.x%size.x+size.x)%size.x,clamp(p.y,0,size.y-1)),0).r);}
+      int maskFor(int id){return int(texelFetch(uMasks,ivec2(id,0),0).r);}
       void main(){
         vec2 xy=(gl_FragCoord.xy-uSize*.5)/uRadius;float r2=dot(xy,xy);
         if(r2>1.0)discard;
@@ -36,30 +38,32 @@ export function createRenderer(atlas){
         vec2 uv=vec2(atan(world.y,world.x)/6.28318530718+.5,acos(clamp(world.z,-1.0,1.0))/3.14159265359);
         ivec2 size=textureSize(uAtlas,0),p=ivec2(floor(uv*vec2(size)));
         int mask=0;float edge=1.0;
-        for(int i=0;i<7;i++){
+        for(int i=0;i<12;i++){
           if(i>=uCount)break;
           float d=dot(uAxes[i],world)-uCut;if(d>0.0)mask|=1<<i;
           if(uAngle>0.00001)edge=min(edge,smoothstep(0.0,max(fwidth(d)*1.05,0.00006),abs(d)));
         }
         int id=sampleId(p,size);
-        if(id==0||uMasks[id]!=mask){
+        if(id==0||maskFor(id)!=mask){
           int found=0;
           for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++){
             int candidate=sampleId(p+ivec2(x,y),size);
-            if(candidate>0&&uMasks[candidate]==mask)found=candidate;
+            if(candidate>0&&maskFor(candidate)==mask)found=candidate;
           }
-          id=found>0?found:uFallback[mask];
+          if(found==0)for(int j=1;j<=uPieces;j++){if(maskFor(j)==mask){found=j;break;}}
+          id=found;
         }
-        id=clamp(id,1,63);vec3 color=uColors[id];
-        if(uSelected>0&&id!=uSelected)color=mix(vec3(dot(color,vec3(.2126,.7152,.0722))),color,.22);
+        id=clamp(id,1,uPieces);vec3 color=texelFetch(uColors,ivec2(id,0),0).rgb;
         vec3 light=normalize(vec3(-.45,.65,1.1));float shade=.60+.36*max(0.0,dot(local,light));
         float shine=.13*pow(max(0.0,dot(local,normalize(light+vec3(0,0,1)))),36.0);
         color=color*shade+vec3(shine);color=mix(uInk,color,edge);
         float silhouette=smoothstep(0.0,1.4/uRadius,1.0-sqrt(r2));outColor=vec4(color,silhouette);
       }`));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));
- for(const name of ['Size','Radius','Camera','Atlas','Count','Selected','Cut','Angle','Ink'])uniforms[name]=gl.getUniformLocation(program,'u'+name);
- for(const name of ['Masks','Fallback','Axes','Colors'])uniforms[name]=gl.getUniformLocation(program,'u'+name+'[0]');
+ for(const name of ['Size','Radius','Camera','Atlas','Count','Pieces','Cut','Angle','Ink','Masks','Colors'])uniforms[name]=gl.getUniformLocation(program,'u'+name);
+ uniforms.Axes=gl.getUniformLocation(program,'uAxes[0]');
  texture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,texture);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.REPEAT);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+ maskTexture=gl.createTexture();colorTexture=gl.createTexture();
+ for(const t of [maskTexture,colorTexture]){gl.bindTexture(gl.TEXTURE_2D,t);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);}
  }catch(e){console.warn('Using the software renderer:',e);gl=null;}}
  const cpuCanvas=document.createElement('canvas'),cpu=cpuCanvas.getContext('2d');
  surface.addEventListener('webglcontextlost',e=>{e.preventDefault();gl=null;});
@@ -68,13 +72,14 @@ export function createRenderer(atlas){
   const W=Math.round(w*dpr),H=Math.round(h*dpr);if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H;}
   const ctx=canvas.getContext('2d'),r=Math.min(w,h)*.423*state.zoom;
   const dark=matchMedia('(prefers-color-scheme: dark)').matches,ink=dark?[.83,.89,.98]:[.09,.14,.23],bg=dark?[.09,.13,.19]:[1,1,1];
-  const palette=Array.from({length:64},(_,id)=>{let c=colors[state.classes[id]||0];if(state.selected>=0&&state.classes[id]!==state.selected){const gray=dot(c,[.2126,.7152,.0722]);c=c.map(x=>gray*.8+x*.2);}return c;});
+  const palette=Array.from({length:state.variant.count+1},(_,id)=>{let c=colors[state.classes[id]||0];if(state.selected>=0&&state.classes[id]!==state.selected){const gray=dot(c,[.2126,.7152,.0722]);c=c.map(x=>gray*.8+x*.2);}return c;});
   ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,W,H);
   if(gl){
-   surface.width=W;surface.height=H;gl.viewport(0,0,W,H);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.useProgram(program);gl.bindTexture(gl.TEXTURE_2D,texture);
-   if(lastState!==state){gl.pixelStorei(gl.UNPACK_ALIGNMENT,1);gl.texImage2D(gl.TEXTURE_2D,0,gl.R8UI,atlas.width,atlas.height,0,gl.RED_INTEGER,gl.UNSIGNED_BYTE,state.pixels);lastState=state;}
+   surface.width=W;surface.height=H;gl.viewport(0,0,W,H);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.useProgram(program);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+   if(lastState!==state){gl.pixelStorei(gl.UNPACK_ALIGNMENT,1);gl.texImage2D(gl.TEXTURE_2D,0,gl.R8UI,atlas.width,atlas.height,0,gl.RED_INTEGER,gl.UNSIGNED_BYTE,state.pixels);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,maskTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.R32UI,state.masks.length,1,0,gl.RED_INTEGER,gl.UNSIGNED_INT,state.masks);lastState=state;}
+   gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,maskTexture);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,colorTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA8,palette.length,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array(palette.flatMap(c=>[...c.map(x=>Math.round(x*255)),255])));
    const inv=inverse(state.q),matrix=[...applyQ(inv,[1,0,0]),...applyQ(inv,[0,1,0]),...applyQ(inv,[0,0,1])];
-   gl.uniform2f(uniforms.Size,W,H);gl.uniform1f(uniforms.Radius,r*dpr);gl.uniformMatrix3fv(uniforms.Camera,false,new Float32Array(matrix));gl.uniform1i(uniforms.Atlas,0);gl.uniform1i(uniforms.Count,state.family.axes.length);gl.uniform1i(uniforms.Selected,0);gl.uniform1f(uniforms.Cut,state.cut);gl.uniform1f(uniforms.Angle,state.variant.angle);gl.uniform3fv(uniforms.Ink,new Float32Array(ink));gl.uniform3fv(uniforms.Colors,new Float32Array(palette.flat()));gl.uniform3fv(uniforms.Axes,new Float32Array(state.family.axes.flat().concat(Array(21-state.family.axes.length*3).fill(0))));gl.uniform1iv(uniforms.Masks,state.masks);gl.uniform1iv(uniforms.Fallback,state.fallback);gl.drawArrays(gl.TRIANGLES,0,3);ctx.drawImage(surface,0,0);
+   gl.uniform2f(uniforms.Size,W,H);gl.uniform1f(uniforms.Radius,r*dpr);gl.uniformMatrix3fv(uniforms.Camera,false,new Float32Array(matrix));gl.uniform1i(uniforms.Atlas,0);gl.uniform1i(uniforms.Count,state.family.axes.length);gl.uniform1i(uniforms.Pieces,state.variant.count);gl.uniform1i(uniforms.Masks,1);gl.uniform1i(uniforms.Colors,2);gl.uniform1f(uniforms.Cut,state.cut);gl.uniform1f(uniforms.Angle,state.variant.angle);gl.uniform3fv(uniforms.Ink,new Float32Array(ink));gl.uniform3fv(uniforms.Axes,new Float32Array(state.family.axes.flat().concat(Array(36-state.family.axes.length*3).fill(0))));gl.drawArrays(gl.TRIANGLES,0,3);ctx.drawImage(surface,0,0);
   }else{
    const scale=Math.min(1,300/w),cw=Math.round(w*scale),ch=Math.round(h*scale);cpuCanvas.width=cw;cpuCanvas.height=ch;const data=cpu.createImageData(cw,ch);const light=norm([-.45,.65,1.1]);
    for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){const world=worldAt(state,(x+.5)/scale,(y+.5)/scale,w,h);if(!world)continue;const id=pieceAt(state,world,atlas)||1,local=applyQ(state.q,world),col=palette[id];const shade=.6+.36*Math.max(0,dot(local,light));let edge=1;if(state.variant.angle>0)for(const u of state.family.axes)edge=Math.min(edge,Math.min(1,Math.abs(dot(u,world)-state.cut)*200));const p=(y*cw+x)*4;for(let k=0;k<3;k++)data.data[p+k]=Math.round(255*(ink[k]*(1-edge)+col[k]*shade*edge));data.data[p+3]=255;}cpu.putImageData(data,0,0);ctx.drawImage(cpuCanvas,0,0,W,H);

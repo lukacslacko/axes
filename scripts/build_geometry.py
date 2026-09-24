@@ -56,7 +56,7 @@ def connectivity_block(ga,gb,c,h):
     return inside&(peak>=h-1e-12)
 
 def atlas(U,alpha,expected):
-    h=math.cos(math.radians(alpha));dots=[];mask=np.zeros((H,W),np.uint8);boundary=np.zeros((H,W),bool)
+    h=math.cos(math.radians(alpha));dots=[];mask=np.zeros((H,W),np.uint32);boundary=np.zeros((H,W),bool)
     margin=np.full((H,W),10.)
     if alpha==0:
         out=np.ones((H,W),np.uint8)
@@ -64,7 +64,7 @@ def atlas(U,alpha,expected):
     horizontal=np.ones((H,W),bool);vertical=np.ones((H-1,W),bool)
     for i,u in enumerate(U):
         d=u[0]*X+u[1]*Y+u[2]*Z
-        mask|=((d>h).astype(np.uint8)<<i)
+        mask|=((d>h).astype(np.uint32)<<i)
         boundary|=np.abs(d-h)<1e-11
         margin=np.minimum(margin,np.abs(np.arccos(np.clip(d,-1,1))-math.radians(alpha)))
         horizontal&=~connectivity_block(d,np.roll(d,-1,axis=1),ch,h)
@@ -104,14 +104,20 @@ def atlas(U,alpha,expected):
         out[where]=j+1
     return out,records,len(fullaxes)
 
-names={'one':'1 · Single ray','opposite':'2 · Antipodal pair','ring3':'3 · Triangular ring','ring4':'4 · Square ring','tetra':'4 · Tetrahedral axes','ring5':'5 · Pentagonal ring','bipyramid3':'5 · Triangle + poles','ring6':'6 · Hexagonal ring','bipyramid4':'6 · Octahedral axes','ring7':'7 · Heptagonal ring','bipyramid5':'7 · Pentagon + poles','jumble':'3 · Jumbling example (60° apart)'}
+names={'one':'Single ray','opposite':'Antipodal pair','ring3':'Triangular ring','ring4':'Square ring','tetra':'Tetrahedral axes','ring5':'Pentagonal ring','bipyramid3':'Triangle + poles','ring6':'Hexagonal ring','bipyramid4':'Octahedral axes','ring7':'Heptagonal ring','bipyramid5':'Pentagon + poles','jumble':'Jumbling example (60° apart)'}
 raw={x['name']:x for x in json.load(open('data/configurations.json'))}
 raw['jumble']=dict(axes=[[1,0,0],[.5,math.sqrt(3)/2,0],[.5,1/(2*math.sqrt(3)),math.sqrt(2/3)]],angles=[30,math.degrees(math.acos(math.sqrt(2/3)))],spherical_regions=[4,8,8])
 result=dict(width=W,height=H,families=[])
+cache={}
+for cache_path in [Path('assets/atlas.json'),Path('work/sphere_atlas.json'),Path('work/sphere_atlas.partial.json')]:
+    if cache_path.exists():
+        for f in json.loads(cache_path.read_text())['families']:
+            for v in f['variants']:cache[(f['key'],v['kind'],round(v['angle'],7))]=(f['axes'],v)
 start=time.time();total=0
-for key,name in names.items():
+for key,f in raw.items():
+    name=f.get('title',names.get(key,key))
     f=raw[key];U=np.array(f['axes']);thresholds=[0]+f['angles']+[90]
-    family=dict(key=key,name=name,axes=U.round(10).tolist(),variants=[])
+    family=dict(key=key,name=name,axes=U.round(10).tolist(),variants=[],symmetry=f.get('symmetry'),construction=f.get('construction'))
     definitions=[]
     for i,(lo,hi) in enumerate(zip(thresholds,thresholds[1:])):
         definitions.append(dict(kind='regime',angle=(lo+hi)/2,low=lo,high=hi,expected=f['spherical_regions'][i],regime=i+1))
@@ -120,11 +126,15 @@ for key,name in names.items():
     for info in definitions:
         a=info['angle'];expected=info.pop('expected')
         assert exact_regions(U,a)==expected,(key,a,expected,exact_regions(U,a))
-        pixels,pieces,rays=atlas(U,a,expected)
-        compressed=gzip.compress(pixels.tobytes(),compresslevel=9,mtime=0)
-        info.update(count=len(pieces),pieces=pieces,rays=rays,data=base64.b64encode(compressed).decode())
+        cached=cache.get((key,info['kind'],round(a,7)))
+        if cached and np.max(np.abs(np.array(cached[0])-U))<1e-8 and cached[1]['count']==expected:
+            info.update({k:cached[1][k] for k in ['count','pieces','rays','data']});size=len(base64.b64decode(info['data']))
+        else:
+            pixels,pieces,rays=atlas(U,a,expected)
+            compressed=gzip.compress(pixels.tobytes(),compresslevel=9,mtime=0);size=len(compressed)
+            info.update(count=len(pieces),pieces=pieces,rays=rays,data=base64.b64encode(compressed).decode())
         family['variants'].append(info);total+=1
-        print(f'{total:02d} {key:12s} {info["kind"]:10s} {a:9.5f}° {len(pieces):2d} pieces {len(compressed):6d} bytes {time.time()-start:.1f}s',flush=True)
+        print(f'{total:02d} {key:12s} {info["kind"]:10s} {a:9.5f}° {info["count"]:2d} pieces {size:6d} bytes {time.time()-start:.1f}s',flush=True)
     result['families'].append(family)
     Path('work/sphere_atlas.partial.json').write_text(json.dumps(result,separators=(',',':')))
 Path('work/sphere_atlas.json').write_text(json.dumps(result,separators=(',',':')))

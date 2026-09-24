@@ -4,15 +4,15 @@
 
 An interactive mathematical catalogue of conical twisty puzzles. All configurations and depths appear on one scrollable page, with jump navigation and an independently rotatable sphere for every case. Pieces share a color when legal turns can carry a whole piece into another piece's angular-sector position.
 
-- Eleven standard axis configurations with at most seven directed rays.
-- Thirty-two open cut-arrangement regimes, their critical depths, and both endpoints.
-- A three-axis jumbling example, giving **82 sphere views** in total.
+- **16 standard axis configurations** with at most **9 directed rays**.
+- **59 open cut-arrangement regimes**, their critical depths, and both endpoints.
+- A three-axis jumbling example, giving **141 sphere views** in total.
 - Whole-sector reachability colors, class highlighting, axis labels, and optional piece IDs.
 - Mouse/touch rotation, arrow buttons and keyboard controls, and automatic light/dark appearance.
 
-This is a finite catalogue under the **global axis-symmetry rule**, not a classification of every possible locally defined or jumbling puzzle. At the central-cut endpoint, opposite rays can also turn; views that consequently exceed seven axes are marked. Jumbling reachability is calculated numerically at the displayed angle, not asserted constant over an entire arrangement interval.
+This is a finite catalogue under the **global axis-symmetry rule**, not a classification of every possible locally defined or jumbling puzzle. At the central-cut endpoint, opposite rays can also turn; views that consequently exceed the catalogue’s axis bound are marked. Jumbling reachability is calculated numerically at the displayed angle, not asserted constant over an entire arrangement interval.
 
-See [the mathematical model](docs/model.md) and [the reachability calculation](docs/reachability.md).
+See [the current catalogue and completeness argument](docs/catalogue.md), [the mathematical model](docs/model.md) and [the reachability calculation](docs/reachability.md).
 
 ## Run locally
 
@@ -47,7 +47,7 @@ node --check app.js
 node --check renderer.js
 ```
 
-The renderer shares **one WebGL context** between every card. Each card keeps a 2D image and its own camera; the decompressed atlas cache is bounded. No third-party rendering library is used.
+The renderer shares **one WebGL context** between every card. Every card has a pre-rendered mathematical preview and its own camera; live canvas buffers are retained only near the viewport, and the decompressed atlas cache is bounded. No third-party rendering library is used.
 
 ## License
 

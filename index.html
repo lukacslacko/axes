@@ -1,579 +1,992 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b1423"><meta name="description" content="An interactive mathematical atlas of conical twisty puzzles: up to seven directed axes, all cut-depth regimes, and piece colors determined by legal reachability."><title>Axes — an atlas of conical twisty puzzles</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><script type="module" src="app.js"></script></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b1423"><meta name="description" content="An interactive mathematical atlas of conical twisty puzzles: up to 9 directed axes, all cut-depth regimes, and piece colors determined by legal reachability."><title>Axes — an atlas of conical twisty puzzles</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><script type="module" src="app.js"></script></head>
 <body><a class="skip" href="#atlas">Skip to puzzles</a>
-<aside><a class="brand" href="#top"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16"/><path d="M4 20h32M20 4v32M9 9l22 22M9 31L31 9"/></svg><span>axes<small>THE CONICAL ATLAS</small></span></a><nav aria-label="Axis configurations"><a href="#one"><span>01</span>Single ray</a><a href="#opposite"><span>02</span>Antipodal pair</a><a href="#ring3"><span>03</span>Triangular ring</a><a href="#ring4"><span>04</span>Square ring</a><a href="#tetra"><span>04</span>Tetrahedral axes</a><a href="#ring5"><span>05</span>Pentagonal ring</a><a href="#bipyramid3"><span>05</span>Triangle + poles</a><a href="#ring6"><span>06</span>Hexagonal ring</a><a href="#bipyramid4"><span>06</span>Octahedral axes</a><a href="#ring7"><span>07</span>Heptagonal ring</a><a href="#bipyramid5"><span>07</span>Pentagon + poles</a><a href="#jumble"><span>03</span>Jumbling example (60° apart)</a><a class="method-link" href="#method"><span>↳</span>Model &amp; colors</a></nav><div class="sidebar-footer"><a href="https://github.com/lukacslacko/axes">Source on GitHub ↗</a><span>MIT licensed</span></div></aside>
-<main id="top"><header class="intro"><p class="eyebrow">A MATHEMATICAL CATALOGUE</p><h1>One sphere. Every cut.</h1><p>Explore conical twisty puzzles with up to seven directed axes. Each color is a class of pieces that can reach one another’s positions by legal turns.</p><div class="atlas-meta"><span>11 standard configurations</span><span>32 open regimes</span><span>1 jumbling example</span></div></header>
+<aside><a class="brand" href="#top"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16"/><path d="M4 20h32M20 4v32M9 9l22 22M9 31L31 9"/></svg><span>axes<small>THE CONICAL ATLAS</small></span></a><nav aria-label="Axis configurations"><a href="#one"><span>01</span>Single ray</a><a href="#opposite"><span>02</span>Antipodal pair</a><a href="#ring3"><span>03</span>Triangular ring</a><a href="#ring4"><span>04</span>Square ring</a><a href="#tetra"><span>04</span>Tetrahedral axes</a><a href="#ring5"><span>05</span>Pentagonal ring</a><a href="#bipyramid3"><span>05</span>Triangle + poles</a><a href="#ring6"><span>06</span>Hexagonal ring</a><a href="#bipyramid4"><span>06</span>Octahedral axes</a><a href="#ring7"><span>07</span>Heptagonal ring</a><a href="#bipyramid5"><span>07</span>Pentagon + poles</a><a href="#ring8"><span>08</span>8-gon ring</a><a href="#bipyramid6"><span>08</span>6-gon + poles</a><a href="#cube"><span>08</span>Cube vertices</a><a href="#ring9"><span>09</span>9-gon ring</a><a href="#bipyramid7"><span>09</span>7-gon + poles</a><a href="#jumble"><span>03</span>Jumbling example (60° apart)</a><a class="method-link" href="#method"><span>↳</span>Model &amp; colors</a></nav><div class="sidebar-footer"><a href="https://github.com/lukacslacko/axes">Source on GitHub ↗</a><span>MIT licensed</span></div></aside>
+<main id="top"><header class="intro"><p class="eyebrow">A MATHEMATICAL CATALOGUE</p><h1>One sphere. Every cut.</h1><p>Explore conical twisty puzzles with up to 9 directed axes. Each color is a class of pieces that can reach one another’s positions by legal turns.</p><div class="atlas-meta"><span>16 standard configurations</span><span>59 open regimes</span><span>1 jumbling example</span></div></header>
 <div class="toolbar"><span>Drag any sphere to rotate · Tap a piece to inspect</span><div><label><input type="checkbox" id="show-axes" checked> Axes</label><label><input type="checkbox" id="show-numbers"> Piece IDs</label></div></div>
 <p class="notice">Depth α is the cone’s half-angle: 0° removes the cuts; 90° cuts through the center. All cases are below, including critical depths and endpoint limits. Colors are local to each sphere; each swatch shows the number of pieces in its class.</p><div id="status" role="status">Loading interactive spheres…</div><noscript><p class="error">Enable JavaScript to rotate and color the spheres. The model and case descriptions remain available below.</p></noscript><div id="atlas"><section class="family" id="one"><div class="family-heading"><span class="family-index">01</span><div><h2>Single ray</h2><p>1 directed axes · 1 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="one-2" data-family="0" data-variant="2">
     <header><div><a class="case-title" href="#one-2">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Single ray, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/one-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Single ray at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Single ray, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Single ray, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="one-0" data-family="0" data-variant="0">
     <header><div><a class="case-title" href="#one-0">Regime 1</a><p class="interval">0° < α < 90°</p></div><span class="depth">45°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Single ray, Regime 1, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/one-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Single ray at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Single ray, Regime 1, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>2</strong> pieces · <strong>2</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Single ray, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 45°</p>
     </article><article class="puzzle" id="one-1" data-family="0" data-variant="1">
     <header><div><a class="case-title" href="#one-1">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Single ray, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/one-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Single ray at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Single ray, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>2</strong> pieces · <strong>2</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Single ray, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Opposite rays also turn</p>
     </article></div></section><section class="family" id="opposite"><div class="family-heading"><span class="family-index">02</span><div><h2>Antipodal pair</h2><p>2 directed axes · 1 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="opposite-2" data-family="1" data-variant="2">
     <header><div><a class="case-title" href="#opposite-2">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Antipodal pair, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/opposite-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Antipodal pair at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Antipodal pair, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Antipodal pair, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="opposite-0" data-family="1" data-variant="0">
     <header><div><a class="case-title" href="#opposite-0">Regime 1</a><p class="interval">0° < α < 90°</p></div><span class="depth">45°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Antipodal pair, Regime 1, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/opposite-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Antipodal pair at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Antipodal pair, Regime 1, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>3</strong> pieces · <strong>3</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Antipodal pair, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 45°</p>
     </article><article class="puzzle" id="opposite-1" data-family="1" data-variant="1">
     <header><div><a class="case-title" href="#opposite-1">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Antipodal pair, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/opposite-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Antipodal pair at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Antipodal pair, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>2</strong> pieces · <strong>2</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Antipodal pair, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Opposite rays also turn</p>
     </article></div></section><section class="family" id="ring3"><div class="family-heading"><span class="family-index">03</span><div><h2>Triangular ring</h2><p>3 directed axes · 2 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="ring3-4" data-family="2" data-variant="4">
     <header><div><a class="case-title" href="#ring3-4">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangular ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring3-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangular ring at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangular ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangular ring, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="ring3-0" data-family="2" data-variant="0">
     <header><div><a class="case-title" href="#ring3-0">Regime 1</a><p class="interval">0° < α < 60°</p></div><span class="depth">30°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangular ring, Regime 1, 30°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring3-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangular ring at 30°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangular ring, Regime 1, 30°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>4</strong> pieces · <strong>4</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangular ring, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 30°</p>
     </article><article class="puzzle" id="ring3-2" data-family="2" data-variant="2">
     <header><div><a class="case-title" href="#ring3-2">Critical depth</a><p class="interval">α = 60°</p></div><span class="depth">60°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangular ring, Critical depth, 60°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring3-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangular ring at 60°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangular ring, Critical depth, 60°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>5</strong> pieces · <strong>5</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangular ring, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="ring3-1" data-family="2" data-variant="1">
     <header><div><a class="case-title" href="#ring3-1">Regime 2</a><p class="interval">60° < α < 90°</p></div><span class="depth">75°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangular ring, Regime 2, 75°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring3-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangular ring at 75°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangular ring, Regime 2, 75°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>8</strong> pieces · <strong>6</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangular ring, Regime 2">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 75°</p>
     </article><article class="puzzle" id="ring3-3" data-family="2" data-variant="3">
     <header><div><a class="case-title" href="#ring3-3">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangular ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring3-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangular ring at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangular ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>6</strong> pieces · <strong>2</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangular ring, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Opposite rays also turn</p>
     </article></div></section><section class="family" id="ring4"><div class="family-heading"><span class="family-index">04</span><div><h2>Square ring</h2><p>4 directed axes · 2 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="ring4-4" data-family="3" data-variant="4">
     <header><div><a class="case-title" href="#ring4-4">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Square ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring4-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Square ring at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Square ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Square ring, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="ring4-0" data-family="3" data-variant="0">
     <header><div><a class="case-title" href="#ring4-0">Regime 1</a><p class="interval">0° < α < 45°</p></div><span class="depth">22.5°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Square ring, Regime 1, 22.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring4-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Square ring at 22.5°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Square ring, Regime 1, 22.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>5</strong> pieces · <strong>5</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Square ring, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 22.5°</p>
     </article><article class="puzzle" id="ring4-2" data-family="3" data-variant="2">
     <header><div><a class="case-title" href="#ring4-2">Critical depth</a><p class="interval">α = 45°</p></div><span class="depth">45°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Square ring, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring4-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Square ring at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Square ring, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>6</strong> pieces · <strong>6</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Square ring, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="ring4-1" data-family="3" data-variant="1">
     <header><div><a class="case-title" href="#ring4-1">Regime 2</a><p class="interval">45° < α < 90°</p></div><span class="depth">67.5°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Square ring, Regime 2, 67.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring4-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Square ring at 67.5°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Square ring, Regime 2, 67.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>10</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Square ring, Regime 2">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 67.5°</p>
     </article><article class="puzzle" id="ring4-3" data-family="3" data-variant="3">
     <header><div><a class="case-title" href="#ring4-3">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Square ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring4-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Square ring at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Square ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>4</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Square ring, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Opposite rays also turn</p>
     </article></div></section><section class="family" id="tetra"><div class="family-heading"><span class="family-index">05</span><div><h2>Tetrahedral axes</h2><p>4 directed axes · 3 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="tetra-6" data-family="4" data-variant="6">
     <header><div><a class="case-title" href="#tetra-6">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Tetrahedral axes, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/tetra-6.png" width="440" height="360" loading="lazy" decoding="async" alt="Tetrahedral axes at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Tetrahedral axes, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Tetrahedral axes, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="tetra-0" data-family="4" data-variant="0">
     <header><div><a class="case-title" href="#tetra-0">Regime 1</a><p class="interval">0° < α < 54.736°</p></div><span class="depth">27.368°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Tetrahedral axes, Regime 1, 27.368°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/tetra-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Tetrahedral axes at 27.368°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Tetrahedral axes, Regime 1, 27.368°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>5</strong> pieces · <strong>5</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Tetrahedral axes, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 27.368°</p>
     </article><article class="puzzle" id="tetra-3" data-family="4" data-variant="3">
     <header><div><a class="case-title" href="#tetra-3">Critical depth</a><p class="interval">α = 54.736°</p></div><span class="depth">54.736°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Tetrahedral axes, Critical depth, 54.736°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/tetra-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Tetrahedral axes at 54.736°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Tetrahedral axes, Critical depth, 54.736°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>8</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Tetrahedral axes, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="tetra-1" data-family="4" data-variant="1">
     <header><div><a class="case-title" href="#tetra-1">Regime 2</a><p class="interval">54.736° < α < 70.529°</p></div><span class="depth">62.632°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Tetrahedral axes, Regime 2, 62.632°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/tetra-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Tetrahedral axes at 62.632°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Tetrahedral axes, Regime 2, 62.632°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>14</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Tetrahedral axes, Regime 2">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 62.632°</p>
     </article><article class="puzzle" id="tetra-4" data-family="4" data-variant="4">
     <header><div><a class="case-title" href="#tetra-4">Critical depth</a><p class="interval">α = 70.529°</p></div><span class="depth">70.529°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Tetrahedral axes, Critical depth, 70.529°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/tetra-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Tetrahedral axes at 70.529°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Tetrahedral axes, Critical depth, 70.529°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>10</strong> pieces · <strong>5</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Tetrahedral axes, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="tetra-2" data-family="4" data-variant="2">
     <header><div><a class="case-title" href="#tetra-2">Regime 3</a><p class="interval">70.529° < α < 90°</p></div><span class="depth">80.264°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Tetrahedral axes, Regime 3, 80.264°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/tetra-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Tetrahedral axes at 80.264°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Tetrahedral axes, Regime 3, 80.264°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>14</strong> pieces · <strong>6</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Tetrahedral axes, Regime 3">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 80.264°</p>
     </article><article class="puzzle" id="tetra-5" data-family="4" data-variant="5">
     <header><div><a class="case-title" href="#tetra-5">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Tetrahedral axes, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/tetra-5.png" width="440" height="360" loading="lazy" decoding="async" alt="Tetrahedral axes at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Tetrahedral axes, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>14</strong> pieces · <strong>3</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Tetrahedral axes, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
-    <p class="case-note">Opposite rays also turn · exceeds 7 directed axes</p>
+    <p class="case-note">Opposite rays also turn</p>
     </article></div></section><section class="family" id="ring5"><div class="family-heading"><span class="family-index">06</span><div><h2>Pentagonal ring</h2><p>5 directed axes · 3 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="ring5-6" data-family="5" data-variant="6">
     <header><div><a class="case-title" href="#ring5-6">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagonal ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring5-6.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagonal ring at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagonal ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagonal ring, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="ring5-0" data-family="5" data-variant="0">
     <header><div><a class="case-title" href="#ring5-0">Regime 1</a><p class="interval">0° < α < 36°</p></div><span class="depth">18°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagonal ring, Regime 1, 18°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring5-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagonal ring at 18°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagonal ring, Regime 1, 18°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>6</strong> pieces · <strong>6</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagonal ring, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 18°</p>
     </article><article class="puzzle" id="ring5-3" data-family="5" data-variant="3">
     <header><div><a class="case-title" href="#ring5-3">Critical depth</a><p class="interval">α = 36°</p></div><span class="depth">36°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagonal ring, Critical depth, 36°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring5-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagonal ring at 36°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagonal ring, Critical depth, 36°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>7</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagonal ring, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="ring5-1" data-family="5" data-variant="1">
     <header><div><a class="case-title" href="#ring5-1">Regime 2</a><p class="interval">36° < α < 72°</p></div><span class="depth">54°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagonal ring, Regime 2, 54°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring5-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagonal ring at 54°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagonal ring, Regime 2, 54°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>12</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagonal ring, Regime 2">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 54°</p>
     </article><article class="puzzle" id="ring5-4" data-family="5" data-variant="4">
     <header><div><a class="case-title" href="#ring5-4">Critical depth</a><p class="interval">α = 72°</p></div><span class="depth">72°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagonal ring, Critical depth, 72°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring5-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagonal ring at 72°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagonal ring, Critical depth, 72°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>17</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagonal ring, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="ring5-2" data-family="5" data-variant="2">
     <header><div><a class="case-title" href="#ring5-2">Regime 3</a><p class="interval">72° < α < 90°</p></div><span class="depth">81°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagonal ring, Regime 3, 81°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring5-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagonal ring at 81°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagonal ring, Regime 3, 81°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>22</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagonal ring, Regime 3">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 81°</p>
     </article><article class="puzzle" id="ring5-5" data-family="5" data-variant="5">
     <header><div><a class="case-title" href="#ring5-5">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagonal ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring5-5.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagonal ring at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagonal ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>10</strong> pieces · <strong>2</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagonal ring, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
-    <p class="case-note">Opposite rays also turn · exceeds 7 directed axes</p>
+    <p class="case-note">Opposite rays also turn · 10 rays: exceeds 9-axis limit</p>
     </article></div></section><section class="family" id="bipyramid3"><div class="family-heading"><span class="family-index">07</span><div><h2>Triangle + poles</h2><p>5 directed axes · 4 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="bipyramid3-8" data-family="6" data-variant="8">
     <header><div><a class="case-title" href="#bipyramid3-8">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangle + poles, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid3-8.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangle + poles at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangle + poles, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangle + poles, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="bipyramid3-0" data-family="6" data-variant="0">
     <header><div><a class="case-title" href="#bipyramid3-0">Regime 1</a><p class="interval">0° < α < 45°</p></div><span class="depth">22.5°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangle + poles, Regime 1, 22.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid3-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangle + poles at 22.5°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangle + poles, Regime 1, 22.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>6</strong> pieces · <strong>6</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangle + poles, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 22.5°</p>
     </article><article class="puzzle" id="bipyramid3-4" data-family="6" data-variant="4">
     <header><div><a class="case-title" href="#bipyramid3-4">Critical depth</a><p class="interval">α = 45°</p></div><span class="depth">45°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangle + poles, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid3-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangle + poles at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangle + poles, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>8</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangle + poles, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="bipyramid3-1" data-family="6" data-variant="1">
     <header><div><a class="case-title" href="#bipyramid3-1">Regime 2</a><p class="interval">45° < α < 60°</p></div><span class="depth">52.5°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangle + poles, Regime 2, 52.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid3-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangle + poles at 52.5°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangle + poles, Regime 2, 52.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>14</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangle + poles, Regime 2">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 52.5°</p>
     </article><article class="puzzle" id="bipyramid3-5" data-family="6" data-variant="5">
     <header><div><a class="case-title" href="#bipyramid3-5">Critical depth</a><p class="interval">α = 60°</p></div><span class="depth">60°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangle + poles, Critical depth, 60°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid3-5.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangle + poles at 60°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangle + poles, Critical depth, 60°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>17</strong> pieces · <strong>12</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangle + poles, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="bipyramid3-2" data-family="6" data-variant="2">
     <header><div><a class="case-title" href="#bipyramid3-2">Regime 3</a><p class="interval">60° < α < 63.435°</p></div><span class="depth">61.717°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangle + poles, Regime 3, 61.717°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid3-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangle + poles at 61.717°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangle + poles, Regime 3, 61.717°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>20</strong> pieces · <strong>13</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangle + poles, Regime 3">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 61.717°</p>
     </article><article class="puzzle" id="bipyramid3-6" data-family="6" data-variant="6">
     <header><div><a class="case-title" href="#bipyramid3-6">Critical depth</a><p class="interval">α = 63.435°</p></div><span class="depth">63.435°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangle + poles, Critical depth, 63.435°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid3-6.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangle + poles at 63.435°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangle + poles, Critical depth, 63.435°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>14</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangle + poles, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="bipyramid3-3" data-family="6" data-variant="3">
     <header><div><a class="case-title" href="#bipyramid3-3">Regime 4</a><p class="interval">63.435° < α < 90°</p></div><span class="depth">76.717°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangle + poles, Regime 4, 76.717°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid3-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangle + poles at 76.717°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangle + poles, Regime 4, 76.717°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>20</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangle + poles, Regime 4">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 76.717°</p>
     </article><article class="puzzle" id="bipyramid3-7" data-family="6" data-variant="7">
     <header><div><a class="case-title" href="#bipyramid3-7">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Triangle + poles, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid3-7.png" width="440" height="360" loading="lazy" decoding="async" alt="Triangle + poles at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Triangle + poles, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>12</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Triangle + poles, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
-    <p class="case-note">Opposite rays also turn · exceeds 7 directed axes</p>
+    <p class="case-note">Opposite rays also turn</p>
     </article></div></section><section class="family" id="ring6"><div class="family-heading"><span class="family-index">08</span><div><h2>Hexagonal ring</h2><p>6 directed axes · 3 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="ring6-6" data-family="7" data-variant="6">
     <header><div><a class="case-title" href="#ring6-6">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Hexagonal ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring6-6.png" width="440" height="360" loading="lazy" decoding="async" alt="Hexagonal ring at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Hexagonal ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Hexagonal ring, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="ring6-0" data-family="7" data-variant="0">
     <header><div><a class="case-title" href="#ring6-0">Regime 1</a><p class="interval">0° < α < 30°</p></div><span class="depth">15°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Hexagonal ring, Regime 1, 15°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring6-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Hexagonal ring at 15°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Hexagonal ring, Regime 1, 15°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>7</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Hexagonal ring, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 15°</p>
     </article><article class="puzzle" id="ring6-3" data-family="7" data-variant="3">
     <header><div><a class="case-title" href="#ring6-3">Critical depth</a><p class="interval">α = 30°</p></div><span class="depth">30°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Hexagonal ring, Critical depth, 30°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring6-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Hexagonal ring at 30°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Hexagonal ring, Critical depth, 30°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>8</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Hexagonal ring, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="ring6-1" data-family="7" data-variant="1">
     <header><div><a class="case-title" href="#ring6-1">Regime 2</a><p class="interval">30° < α < 60°</p></div><span class="depth">45°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Hexagonal ring, Regime 2, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring6-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Hexagonal ring at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Hexagonal ring, Regime 2, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>14</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Hexagonal ring, Regime 2">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 45°</p>
     </article><article class="puzzle" id="ring6-4" data-family="7" data-variant="4">
     <header><div><a class="case-title" href="#ring6-4">Critical depth</a><p class="interval">α = 60°</p></div><span class="depth">60°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Hexagonal ring, Critical depth, 60°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring6-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Hexagonal ring at 60°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Hexagonal ring, Critical depth, 60°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>20</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Hexagonal ring, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="ring6-2" data-family="7" data-variant="2">
     <header><div><a class="case-title" href="#ring6-2">Regime 3</a><p class="interval">60° < α < 90°</p></div><span class="depth">75°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Hexagonal ring, Regime 3, 75°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring6-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Hexagonal ring at 75°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Hexagonal ring, Regime 3, 75°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>26</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Hexagonal ring, Regime 3">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 75°</p>
     </article><article class="puzzle" id="ring6-5" data-family="7" data-variant="5">
     <header><div><a class="case-title" href="#ring6-5">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Hexagonal ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring6-5.png" width="440" height="360" loading="lazy" decoding="async" alt="Hexagonal ring at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Hexagonal ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>6</strong> pieces · <strong>2</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Hexagonal ring, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Opposite rays also turn</p>
     </article></div></section><section class="family" id="bipyramid4"><div class="family-heading"><span class="family-index">09</span><div><h2>Octahedral axes</h2><p>6 directed axes · 3 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="bipyramid4-6" data-family="8" data-variant="6">
     <header><div><a class="case-title" href="#bipyramid4-6">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Octahedral axes, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid4-6.png" width="440" height="360" loading="lazy" decoding="async" alt="Octahedral axes at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Octahedral axes, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Octahedral axes, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="bipyramid4-0" data-family="8" data-variant="0">
     <header><div><a class="case-title" href="#bipyramid4-0">Regime 1</a><p class="interval">0° < α < 45°</p></div><span class="depth">22.5°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Octahedral axes, Regime 1, 22.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid4-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Octahedral axes at 22.5°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Octahedral axes, Regime 1, 22.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>7</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Octahedral axes, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 22.5°</p>
     </article><article class="puzzle" id="bipyramid4-3" data-family="8" data-variant="3">
     <header><div><a class="case-title" href="#bipyramid4-3">Critical depth</a><p class="interval">α = 45°</p></div><span class="depth">45°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Octahedral axes, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid4-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Octahedral axes at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Octahedral axes, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>14</strong> pieces · <strong>14</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Octahedral axes, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="bipyramid4-1" data-family="8" data-variant="1">
     <header><div><a class="case-title" href="#bipyramid4-1">Regime 2</a><p class="interval">45° < α < 54.736°</p></div><span class="depth">49.868°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Octahedral axes, Regime 2, 49.868°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid4-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Octahedral axes at 49.868°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Octahedral axes, Regime 2, 49.868°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>26</strong> pieces · <strong>15</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Octahedral axes, Regime 2">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 49.868°</p>
     </article><article class="puzzle" id="bipyramid4-4" data-family="8" data-variant="4">
     <header><div><a class="case-title" href="#bipyramid4-4">Critical depth</a><p class="interval">α = 54.736°</p></div><span class="depth">54.736°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Octahedral axes, Critical depth, 54.736°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid4-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Octahedral axes at 54.736°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Octahedral axes, Critical depth, 54.736°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>18</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Octahedral axes, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="bipyramid4-2" data-family="8" data-variant="2">
     <header><div><a class="case-title" href="#bipyramid4-2">Regime 3</a><p class="interval">54.736° < α < 90°</p></div><span class="depth">72.368°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Octahedral axes, Regime 3, 72.368°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid4-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Octahedral axes at 72.368°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Octahedral axes, Regime 3, 72.368°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>26</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Octahedral axes, Regime 3">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 72.368°</p>
     </article><article class="puzzle" id="bipyramid4-5" data-family="8" data-variant="5">
     <header><div><a class="case-title" href="#bipyramid4-5">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Octahedral axes, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid4-5.png" width="440" height="360" loading="lazy" decoding="async" alt="Octahedral axes at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Octahedral axes, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>8</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Octahedral axes, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Opposite rays also turn</p>
     </article></div></section><section class="family" id="ring7"><div class="family-heading"><span class="family-index">10</span><div><h2>Heptagonal ring</h2><p>7 directed axes · 4 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="ring7-8" data-family="9" data-variant="8">
     <header><div><a class="case-title" href="#ring7-8">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Heptagonal ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring7-8.png" width="440" height="360" loading="lazy" decoding="async" alt="Heptagonal ring at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Heptagonal ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Heptagonal ring, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="ring7-0" data-family="9" data-variant="0">
     <header><div><a class="case-title" href="#ring7-0">Regime 1</a><p class="interval">0° < α < 25.714°</p></div><span class="depth">12.857°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Heptagonal ring, Regime 1, 12.857°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring7-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Heptagonal ring at 12.857°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Heptagonal ring, Regime 1, 12.857°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>8</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Heptagonal ring, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 12.857°</p>
     </article><article class="puzzle" id="ring7-4" data-family="9" data-variant="4">
     <header><div><a class="case-title" href="#ring7-4">Critical depth</a><p class="interval">α = 25.714°</p></div><span class="depth">25.714°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Heptagonal ring, Critical depth, 25.714°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring7-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Heptagonal ring at 25.714°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Heptagonal ring, Critical depth, 25.714°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>9</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Heptagonal ring, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="ring7-1" data-family="9" data-variant="1">
     <header><div><a class="case-title" href="#ring7-1">Regime 2</a><p class="interval">25.714° < α < 51.429°</p></div><span class="depth">38.571°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Heptagonal ring, Regime 2, 38.571°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring7-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Heptagonal ring at 38.571°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Heptagonal ring, Regime 2, 38.571°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>16</strong> pieces · <strong>10</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Heptagonal ring, Regime 2">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 38.571°</p>
     </article><article class="puzzle" id="ring7-5" data-family="9" data-variant="5">
     <header><div><a class="case-title" href="#ring7-5">Critical depth</a><p class="interval">α = 51.429°</p></div><span class="depth">51.429°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Heptagonal ring, Critical depth, 51.429°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring7-5.png" width="440" height="360" loading="lazy" decoding="async" alt="Heptagonal ring at 51.429°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Heptagonal ring, Critical depth, 51.429°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>23</strong> pieces · <strong>10</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Heptagonal ring, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="ring7-2" data-family="9" data-variant="2">
     <header><div><a class="case-title" href="#ring7-2">Regime 3</a><p class="interval">51.429° < α < 77.143°</p></div><span class="depth">64.286°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Heptagonal ring, Regime 3, 64.286°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring7-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Heptagonal ring at 64.286°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Heptagonal ring, Regime 3, 64.286°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>30</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Heptagonal ring, Regime 3">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 64.286°</p>
     </article><article class="puzzle" id="ring7-6" data-family="9" data-variant="6">
     <header><div><a class="case-title" href="#ring7-6">Critical depth</a><p class="interval">α = 77.143°</p></div><span class="depth">77.143°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Heptagonal ring, Critical depth, 77.143°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring7-6.png" width="440" height="360" loading="lazy" decoding="async" alt="Heptagonal ring at 77.143°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Heptagonal ring, Critical depth, 77.143°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>37</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Heptagonal ring, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="ring7-3" data-family="9" data-variant="3">
     <header><div><a class="case-title" href="#ring7-3">Regime 4</a><p class="interval">77.143° < α < 90°</p></div><span class="depth">83.571°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Heptagonal ring, Regime 4, 83.571°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring7-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Heptagonal ring at 83.571°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Heptagonal ring, Regime 4, 83.571°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>44</strong> pieces · <strong>12</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Heptagonal ring, Regime 4">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 83.571°</p>
     </article><article class="puzzle" id="ring7-7" data-family="9" data-variant="7">
     <header><div><a class="case-title" href="#ring7-7">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Heptagonal ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/ring7-7.png" width="440" height="360" loading="lazy" decoding="async" alt="Heptagonal ring at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Heptagonal ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>14</strong> pieces · <strong>2</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Heptagonal ring, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
-    <p class="case-note">Opposite rays also turn · exceeds 7 directed axes</p>
+    <p class="case-note">Opposite rays also turn · 14 rays: exceeds 9-axis limit</p>
     </article></div></section><section class="family" id="bipyramid5"><div class="family-heading"><span class="family-index">11</span><div><h2>Pentagon + poles</h2><p>7 directed axes · 6 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="bipyramid5-12" data-family="10" data-variant="12">
     <header><div><a class="case-title" href="#bipyramid5-12">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-12.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body</p>
     </article><article class="puzzle" id="bipyramid5-0" data-family="10" data-variant="0">
     <header><div><a class="case-title" href="#bipyramid5-0">Regime 1</a><p class="interval">0° < α < 36°</p></div><span class="depth">18°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 1, 18°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 18°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 1, 18°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>8</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 18°</p>
     </article><article class="puzzle" id="bipyramid5-6" data-family="10" data-variant="6">
     <header><div><a class="case-title" href="#bipyramid5-6">Critical depth</a><p class="interval">α = 36°</p></div><span class="depth">36°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Critical depth, 36°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-6.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 36°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Critical depth, 36°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>9</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="bipyramid5-1" data-family="10" data-variant="1">
     <header><div><a class="case-title" href="#bipyramid5-1">Regime 2</a><p class="interval">36° < α < 45°</p></div><span class="depth">40.5°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 2, 40.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 40.5°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 2, 40.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>14</strong> pieces · <strong>10</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Regime 2">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 40.5°</p>
     </article><article class="puzzle" id="bipyramid5-7" data-family="10" data-variant="7">
     <header><div><a class="case-title" href="#bipyramid5-7">Critical depth</a><p class="interval">α = 45°</p></div><span class="depth">45°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-7.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>22</strong> pieces · <strong>18</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="bipyramid5-2" data-family="10" data-variant="2">
     <header><div><a class="case-title" href="#bipyramid5-2">Regime 3</a><p class="interval">45° < α < 51.027°</p></div><span class="depth">48.013°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 3, 48.013°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 48.013°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 3, 48.013°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>32</strong> pieces · <strong>19</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Regime 3">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 48.013°</p>
     </article><article class="puzzle" id="bipyramid5-8" data-family="10" data-variant="8">
     <header><div><a class="case-title" href="#bipyramid5-8">Critical depth</a><p class="interval">α = 51.027°</p></div><span class="depth">51.027°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Critical depth, 51.027°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-8.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 51.027°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Critical depth, 51.027°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>22</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="bipyramid5-3" data-family="10" data-variant="3">
     <header><div><a class="case-title" href="#bipyramid5-3">Regime 4</a><p class="interval">51.027° < α < 72°</p></div><span class="depth">61.513°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 4, 61.513°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 61.513°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 4, 61.513°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>32</strong> pieces · <strong>10</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Regime 4">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 61.513°</p>
     </article><article class="puzzle" id="bipyramid5-9" data-family="10" data-variant="9">
     <header><div><a class="case-title" href="#bipyramid5-9">Critical depth</a><p class="interval">α = 72°</p></div><span class="depth">72°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Critical depth, 72°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-9.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 72°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Critical depth, 72°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>37</strong> pieces · <strong>10</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="bipyramid5-4" data-family="10" data-variant="4">
     <header><div><a class="case-title" href="#bipyramid5-4">Regime 5</a><p class="interval">72° < α < 72.828°</p></div><span class="depth">72.414°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 5, 72.414°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 72.414°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 5, 72.414°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>42</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Regime 5">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 72.414°</p>
     </article><article class="puzzle" id="bipyramid5-10" data-family="10" data-variant="10">
     <header><div><a class="case-title" href="#bipyramid5-10">Critical depth</a><p class="interval">α = 72.828°</p></div><span class="depth">72.828°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Critical depth, 72.828°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-10.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 72.828°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Critical depth, 72.828°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>32</strong> pieces · <strong>6</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted</p>
     </article><article class="puzzle" id="bipyramid5-5" data-family="10" data-variant="5">
     <header><div><a class="case-title" href="#bipyramid5-5">Regime 6</a><p class="interval">72.828° < α < 90°</p></div><span class="depth">81.414°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 6, 81.414°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-5.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 81.414°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Regime 6, 81.414°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>42</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Regime 6">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 81.414°</p>
     </article><article class="puzzle" id="bipyramid5-11" data-family="10" data-variant="11">
     <header><div><a class="case-title" href="#bipyramid5-11">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Pentagon + poles, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/bipyramid5-11.png" width="440" height="360" loading="lazy" decoding="async" alt="Pentagon + poles at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Pentagon + poles, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>20</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Pentagon + poles, Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
-    <p class="case-note">Opposite rays also turn · exceeds 7 directed axes</p>
-    </article></div></section><section class="family" id="jumble"><div class="family-heading"><span class="family-index">12</span><div><h2>Jumbling example (60° apart)</h2><p>Three rays at mutual 60°. Partial turns can unblock a different axis while blocking another.</p></div></div><div class="puzzle-grid"><article class="puzzle" id="jumble-6" data-family="11" data-variant="6">
+    <p class="case-note">Opposite rays also turn · 12 rays: exceeds 9-axis limit</p>
+    </article></div></section><section class="family" id="ring8"><div class="family-heading"><span class="family-index">12</span><div><h2>8-gon ring</h2><p>8 directed axes · 4 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="ring8-8" data-family="11" data-variant="8">
+    <header><div><a class="case-title" href="#ring8-8">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
+    <div class="sphere"><img src="assets/previews/ring8-8.png" width="440" height="360" loading="lazy" decoding="async" alt="8-gon ring at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="8-gon ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 8-gon ring, Vanishing cut">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">One uncut body</p>
+    </article><article class="puzzle" id="ring8-0" data-family="11" data-variant="0">
+    <header><div><a class="case-title" href="#ring8-0">Regime 1</a><p class="interval">0° < α < 22.5°</p></div><span class="depth">11.25°</span></header>
+    <div class="sphere"><img src="assets/previews/ring8-0.png" width="440" height="360" loading="lazy" decoding="async" alt="8-gon ring at 11.25°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="8-gon ring, Regime 1, 11.25°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>9</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 8-gon ring, Regime 1">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 11.25°</p>
+    </article><article class="puzzle" id="ring8-4" data-family="11" data-variant="4">
+    <header><div><a class="case-title" href="#ring8-4">Critical depth</a><p class="interval">α = 22.5°</p></div><span class="depth">22.5°</span></header>
+    <div class="sphere"><img src="assets/previews/ring8-4.png" width="440" height="360" loading="lazy" decoding="async" alt="8-gon ring at 22.5°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="8-gon ring, Critical depth, 22.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>10</strong> pieces · <strong>10</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 8-gon ring, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="ring8-1" data-family="11" data-variant="1">
+    <header><div><a class="case-title" href="#ring8-1">Regime 2</a><p class="interval">22.5° < α < 45°</p></div><span class="depth">33.75°</span></header>
+    <div class="sphere"><img src="assets/previews/ring8-1.png" width="440" height="360" loading="lazy" decoding="async" alt="8-gon ring at 33.75°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="8-gon ring, Regime 2, 33.75°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>18</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 8-gon ring, Regime 2">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 33.75°</p>
+    </article><article class="puzzle" id="ring8-5" data-family="11" data-variant="5">
+    <header><div><a class="case-title" href="#ring8-5">Critical depth</a><p class="interval">α = 45°</p></div><span class="depth">45°</span></header>
+    <div class="sphere"><img src="assets/previews/ring8-5.png" width="440" height="360" loading="lazy" decoding="async" alt="8-gon ring at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="8-gon ring, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>26</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 8-gon ring, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="ring8-2" data-family="11" data-variant="2">
+    <header><div><a class="case-title" href="#ring8-2">Regime 3</a><p class="interval">45° < α < 67.5°</p></div><span class="depth">56.25°</span></header>
+    <div class="sphere"><img src="assets/previews/ring8-2.png" width="440" height="360" loading="lazy" decoding="async" alt="8-gon ring at 56.25°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="8-gon ring, Regime 3, 56.25°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>34</strong> pieces · <strong>13</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 8-gon ring, Regime 3">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 56.25°</p>
+    </article><article class="puzzle" id="ring8-6" data-family="11" data-variant="6">
+    <header><div><a class="case-title" href="#ring8-6">Critical depth</a><p class="interval">α = 67.5°</p></div><span class="depth">67.5°</span></header>
+    <div class="sphere"><img src="assets/previews/ring8-6.png" width="440" height="360" loading="lazy" decoding="async" alt="8-gon ring at 67.5°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="8-gon ring, Critical depth, 67.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>42</strong> pieces · <strong>14</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 8-gon ring, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="ring8-3" data-family="11" data-variant="3">
+    <header><div><a class="case-title" href="#ring8-3">Regime 4</a><p class="interval">67.5° < α < 90°</p></div><span class="depth">78.75°</span></header>
+    <div class="sphere"><img src="assets/previews/ring8-3.png" width="440" height="360" loading="lazy" decoding="async" alt="8-gon ring at 78.75°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="8-gon ring, Regime 4, 78.75°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>50</strong> pieces · <strong>15</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 8-gon ring, Regime 4">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 78.75°</p>
+    </article><article class="puzzle" id="ring8-7" data-family="11" data-variant="7">
+    <header><div><a class="case-title" href="#ring8-7">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
+    <div class="sphere"><img src="assets/previews/ring8-7.png" width="440" height="360" loading="lazy" decoding="async" alt="8-gon ring at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="8-gon ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>8</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 8-gon ring, Central cut">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Opposite rays also turn</p>
+    </article></div></section><section class="family" id="bipyramid6"><div class="family-heading"><span class="family-index">13</span><div><h2>6-gon + poles</h2><p>8 directed axes · 6 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="bipyramid6-12" data-family="12" data-variant="12">
+    <header><div><a class="case-title" href="#bipyramid6-12">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-12.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Vanishing cut">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">One uncut body</p>
+    </article><article class="puzzle" id="bipyramid6-0" data-family="12" data-variant="0">
+    <header><div><a class="case-title" href="#bipyramid6-0">Regime 1</a><p class="interval">0° < α < 30°</p></div><span class="depth">15°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-0.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 15°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Regime 1, 15°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>9</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Regime 1">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 15°</p>
+    </article><article class="puzzle" id="bipyramid6-6" data-family="12" data-variant="6">
+    <header><div><a class="case-title" href="#bipyramid6-6">Critical depth</a><p class="interval">α = 30°</p></div><span class="depth">30°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-6.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 30°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Critical depth, 30°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>10</strong> pieces · <strong>10</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid6-1" data-family="12" data-variant="1">
+    <header><div><a class="case-title" href="#bipyramid6-1">Regime 2</a><p class="interval">30° < α < 45°</p></div><span class="depth">37.5°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-1.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 37.5°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Regime 2, 37.5°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>16</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Regime 2">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 37.5°</p>
+    </article><article class="puzzle" id="bipyramid6-7" data-family="12" data-variant="7">
+    <header><div><a class="case-title" href="#bipyramid6-7">Critical depth</a><p class="interval">α = 45°</p></div><span class="depth">45°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-7.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>26</strong> pieces · <strong>21</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid6-2" data-family="12" data-variant="2">
+    <header><div><a class="case-title" href="#bipyramid6-2">Regime 3</a><p class="interval">45° < α < 49.107°</p></div><span class="depth">47.053°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-2.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 47.053°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Regime 3, 47.053°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>38</strong> pieces · <strong>22</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Regime 3">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 47.053°</p>
+    </article><article class="puzzle" id="bipyramid6-8" data-family="12" data-variant="8">
+    <header><div><a class="case-title" href="#bipyramid6-8">Critical depth</a><p class="interval">α = 49.107°</p></div><span class="depth">49.107°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-8.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 49.107°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Critical depth, 49.107°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>26</strong> pieces · <strong>10</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid6-3" data-family="12" data-variant="3">
+    <header><div><a class="case-title" href="#bipyramid6-3">Regime 4</a><p class="interval">49.107° < α < 60°</p></div><span class="depth">54.553°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-3.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 54.553°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Regime 4, 54.553°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>38</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Regime 4">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 54.553°</p>
+    </article><article class="puzzle" id="bipyramid6-9" data-family="12" data-variant="9">
+    <header><div><a class="case-title" href="#bipyramid6-9">Critical depth</a><p class="interval">α = 60°</p></div><span class="depth">60°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-9.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 60°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Critical depth, 60°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>44</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid6-4" data-family="12" data-variant="4">
+    <header><div><a class="case-title" href="#bipyramid6-4">Regime 5</a><p class="interval">60° < α < 63.435°</p></div><span class="depth">61.717°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-4.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 61.717°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Regime 5, 61.717°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>50</strong> pieces · <strong>13</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Regime 5">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 61.717°</p>
+    </article><article class="puzzle" id="bipyramid6-10" data-family="12" data-variant="10">
+    <header><div><a class="case-title" href="#bipyramid6-10">Critical depth</a><p class="interval">α = 63.435°</p></div><span class="depth">63.435°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-10.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 63.435°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Critical depth, 63.435°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>38</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid6-5" data-family="12" data-variant="5">
+    <header><div><a class="case-title" href="#bipyramid6-5">Regime 6</a><p class="interval">63.435° < α < 90°</p></div><span class="depth">76.717°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-5.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 76.717°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Regime 6, 76.717°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>50</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Regime 6">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 76.717°</p>
+    </article><article class="puzzle" id="bipyramid6-11" data-family="12" data-variant="11">
+    <header><div><a class="case-title" href="#bipyramid6-11">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid6-11.png" width="440" height="360" loading="lazy" decoding="async" alt="6-gon + poles at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="6-gon + poles, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>12</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 6-gon + poles, Central cut">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Opposite rays also turn</p>
+    </article></div></section><section class="family" id="cube"><div class="family-heading"><span class="family-index">14</span><div><h2>Cube vertices</h2><p>8 directed axes · 4 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="cube-8" data-family="13" data-variant="8">
+    <header><div><a class="case-title" href="#cube-8">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
+    <div class="sphere"><img src="assets/previews/cube-8.png" width="440" height="360" loading="lazy" decoding="async" alt="Cube vertices at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Cube vertices, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Cube vertices, Vanishing cut">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">One uncut body</p>
+    </article><article class="puzzle" id="cube-0" data-family="13" data-variant="0">
+    <header><div><a class="case-title" href="#cube-0">Regime 1</a><p class="interval">0° < α < 35.264°</p></div><span class="depth">17.632°</span></header>
+    <div class="sphere"><img src="assets/previews/cube-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Cube vertices at 17.632°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Cube vertices, Regime 1, 17.632°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>9</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Cube vertices, Regime 1">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 17.632°</p>
+    </article><article class="puzzle" id="cube-4" data-family="13" data-variant="4">
+    <header><div><a class="case-title" href="#cube-4">Critical depth</a><p class="interval">α = 35.264°</p></div><span class="depth">35.264°</span></header>
+    <div class="sphere"><img src="assets/previews/cube-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Cube vertices at 35.264°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Cube vertices, Critical depth, 35.264°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>14</strong> pieces · <strong>14</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Cube vertices, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="cube-1" data-family="13" data-variant="1">
+    <header><div><a class="case-title" href="#cube-1">Regime 2</a><p class="interval">35.264° < α < 54.736°</p></div><span class="depth">45°</span></header>
+    <div class="sphere"><img src="assets/previews/cube-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Cube vertices at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Cube vertices, Regime 2, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>26</strong> pieces · <strong>15</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Cube vertices, Regime 2">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 45°</p>
+    </article><article class="puzzle" id="cube-5" data-family="13" data-variant="5">
+    <header><div><a class="case-title" href="#cube-5">Critical depth</a><p class="interval">α = 54.736°</p></div><span class="depth">54.736°</span></header>
+    <div class="sphere"><img src="assets/previews/cube-5.png" width="440" height="360" loading="lazy" decoding="async" alt="Cube vertices at 54.736°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Cube vertices, Critical depth, 54.736°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>20</strong> pieces · <strong>9</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Cube vertices, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="cube-2" data-family="13" data-variant="2">
+    <header><div><a class="case-title" href="#cube-2">Regime 3</a><p class="interval">54.736° < α < 70.529°</p></div><span class="depth">62.632°</span></header>
+    <div class="sphere"><img src="assets/previews/cube-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Cube vertices at 62.632°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Cube vertices, Regime 3, 62.632°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>50</strong> pieces · <strong>12</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Cube vertices, Regime 3">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 62.632°</p>
+    </article><article class="puzzle" id="cube-6" data-family="13" data-variant="6">
+    <header><div><a class="case-title" href="#cube-6">Critical depth</a><p class="interval">α = 70.529°</p></div><span class="depth">70.529°</span></header>
+    <div class="sphere"><img src="assets/previews/cube-6.png" width="440" height="360" loading="lazy" decoding="async" alt="Cube vertices at 70.529°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Cube vertices, Critical depth, 70.529°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>42</strong> pieces · <strong>4</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Cube vertices, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="cube-3" data-family="13" data-variant="3">
+    <header><div><a class="case-title" href="#cube-3">Regime 4</a><p class="interval">70.529° < α < 90°</p></div><span class="depth">80.264°</span></header>
+    <div class="sphere"><img src="assets/previews/cube-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Cube vertices at 80.264°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Cube vertices, Regime 4, 80.264°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>50</strong> pieces · <strong>6</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Cube vertices, Regime 4">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 80.264°</p>
+    </article><article class="puzzle" id="cube-7" data-family="13" data-variant="7">
+    <header><div><a class="case-title" href="#cube-7">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
+    <div class="sphere"><img src="assets/previews/cube-7.png" width="440" height="360" loading="lazy" decoding="async" alt="Cube vertices at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Cube vertices, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>14</strong> pieces · <strong>3</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Cube vertices, Central cut">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Opposite rays also turn</p>
+    </article></div></section><section class="family" id="ring9"><div class="family-heading"><span class="family-index">15</span><div><h2>9-gon ring</h2><p>9 directed axes · 5 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="ring9-10" data-family="14" data-variant="10">
+    <header><div><a class="case-title" href="#ring9-10">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-10.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Vanishing cut">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">One uncut body</p>
+    </article><article class="puzzle" id="ring9-0" data-family="14" data-variant="0">
+    <header><div><a class="case-title" href="#ring9-0">Regime 1</a><p class="interval">0° < α < 20°</p></div><span class="depth">10°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-0.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 10°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Regime 1, 10°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>10</strong> pieces · <strong>10</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Regime 1">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 10°</p>
+    </article><article class="puzzle" id="ring9-5" data-family="14" data-variant="5">
+    <header><div><a class="case-title" href="#ring9-5">Critical depth</a><p class="interval">α = 20°</p></div><span class="depth">20°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-5.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 20°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Critical depth, 20°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>11</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="ring9-1" data-family="14" data-variant="1">
+    <header><div><a class="case-title" href="#ring9-1">Regime 2</a><p class="interval">20° < α < 40°</p></div><span class="depth">30°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-1.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 30°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Regime 2, 30°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>20</strong> pieces · <strong>12</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Regime 2">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 30°</p>
+    </article><article class="puzzle" id="ring9-6" data-family="14" data-variant="6">
+    <header><div><a class="case-title" href="#ring9-6">Critical depth</a><p class="interval">α = 40°</p></div><span class="depth">40°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-6.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 40°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Critical depth, 40°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>29</strong> pieces · <strong>12</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="ring9-2" data-family="14" data-variant="2">
+    <header><div><a class="case-title" href="#ring9-2">Regime 3</a><p class="interval">40° < α < 60°</p></div><span class="depth">50°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-2.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 50°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Regime 3, 50°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>38</strong> pieces · <strong>13</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Regime 3">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 50°</p>
+    </article><article class="puzzle" id="ring9-7" data-family="14" data-variant="7">
+    <header><div><a class="case-title" href="#ring9-7">Critical depth</a><p class="interval">α = 60°</p></div><span class="depth">60°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-7.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 60°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Critical depth, 60°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>47</strong> pieces · <strong>13</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="ring9-3" data-family="14" data-variant="3">
+    <header><div><a class="case-title" href="#ring9-3">Regime 4</a><p class="interval">60° < α < 80°</p></div><span class="depth">70°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-3.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 70°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Regime 4, 70°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>56</strong> pieces · <strong>14</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Regime 4">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 70°</p>
+    </article><article class="puzzle" id="ring9-8" data-family="14" data-variant="8">
+    <header><div><a class="case-title" href="#ring9-8">Critical depth</a><p class="interval">α = 80°</p></div><span class="depth">80°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-8.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 80°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Critical depth, 80°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>65</strong> pieces · <strong>14</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="ring9-4" data-family="14" data-variant="4">
+    <header><div><a class="case-title" href="#ring9-4">Regime 5</a><p class="interval">80° < α < 90°</p></div><span class="depth">85°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-4.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 85°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Regime 5, 85°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>74</strong> pieces · <strong>15</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Regime 5">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 85°</p>
+    </article><article class="puzzle" id="ring9-9" data-family="14" data-variant="9">
+    <header><div><a class="case-title" href="#ring9-9">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
+    <div class="sphere"><img src="assets/previews/ring9-9.png" width="440" height="360" loading="lazy" decoding="async" alt="9-gon ring at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="9-gon ring, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>18</strong> pieces · <strong>2</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 9-gon ring, Central cut">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Opposite rays also turn · 18 rays: exceeds 9-axis limit</p>
+    </article></div></section><section class="family" id="bipyramid7"><div class="family-heading"><span class="family-index">16</span><div><h2>7-gon + poles</h2><p>9 directed axes · 8 open depth regimes</p></div></div><div class="puzzle-grid"><article class="puzzle" id="bipyramid7-16" data-family="15" data-variant="16">
+    <header><div><a class="case-title" href="#bipyramid7-16">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-16.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Vanishing cut">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">One uncut body</p>
+    </article><article class="puzzle" id="bipyramid7-0" data-family="15" data-variant="0">
+    <header><div><a class="case-title" href="#bipyramid7-0">Regime 1</a><p class="interval">0° < α < 25.714°</p></div><span class="depth">12.857°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-0.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 12.857°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Regime 1, 12.857°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>10</strong> pieces · <strong>10</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Regime 1">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 12.857°</p>
+    </article><article class="puzzle" id="bipyramid7-8" data-family="15" data-variant="8">
+    <header><div><a class="case-title" href="#bipyramid7-8">Critical depth</a><p class="interval">α = 25.714°</p></div><span class="depth">25.714°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-8.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 25.714°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Critical depth, 25.714°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>11</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid7-1" data-family="15" data-variant="1">
+    <header><div><a class="case-title" href="#bipyramid7-1">Regime 2</a><p class="interval">25.714° < α < 45°</p></div><span class="depth">35.357°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-1.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 35.357°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Regime 2, 35.357°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>18</strong> pieces · <strong>12</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Regime 2">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 35.357°</p>
+    </article><article class="puzzle" id="bipyramid7-9" data-family="15" data-variant="9">
+    <header><div><a class="case-title" href="#bipyramid7-9">Critical depth</a><p class="interval">α = 45°</p></div><span class="depth">45°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-9.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 45°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Critical depth, 45°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>30</strong> pieces · <strong>24</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid7-2" data-family="15" data-variant="2">
+    <header><div><a class="case-title" href="#bipyramid7-2">Regime 3</a><p class="interval">45° < α < 47.982°</p></div><span class="depth">46.491°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-2.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 46.491°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Regime 3, 46.491°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>44</strong> pieces · <strong>25</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Regime 3">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 46.491°</p>
+    </article><article class="puzzle" id="bipyramid7-10" data-family="15" data-variant="10">
+    <header><div><a class="case-title" href="#bipyramid7-10">Critical depth</a><p class="interval">α = 47.982°</p></div><span class="depth">47.982°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-10.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 47.982°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Critical depth, 47.982°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>30</strong> pieces · <strong>11</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid7-3" data-family="15" data-variant="3">
+    <header><div><a class="case-title" href="#bipyramid7-3">Regime 4</a><p class="interval">47.982° < α < 51.429°</p></div><span class="depth">49.705°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-3.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 49.705°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Regime 4, 49.705°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>44</strong> pieces · <strong>12</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Regime 4">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 49.705°</p>
+    </article><article class="puzzle" id="bipyramid7-11" data-family="15" data-variant="11">
+    <header><div><a class="case-title" href="#bipyramid7-11">Critical depth</a><p class="interval">α = 51.429°</p></div><span class="depth">51.429°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-11.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 51.429°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Critical depth, 51.429°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>51</strong> pieces · <strong>12</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid7-4" data-family="15" data-variant="4">
+    <header><div><a class="case-title" href="#bipyramid7-4">Regime 5</a><p class="interval">51.429° < α < 58.057°</p></div><span class="depth">54.743°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-4.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 54.743°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Regime 5, 54.743°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>58</strong> pieces · <strong>13</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Regime 5">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 54.743°</p>
+    </article><article class="puzzle" id="bipyramid7-12" data-family="15" data-variant="12">
+    <header><div><a class="case-title" href="#bipyramid7-12">Critical depth</a><p class="interval">α = 58.057°</p></div><span class="depth">58.057°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-12.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 58.057°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Critical depth, 58.057°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>44</strong> pieces · <strong>6</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid7-5" data-family="15" data-variant="5">
+    <header><div><a class="case-title" href="#bipyramid7-5">Regime 6</a><p class="interval">58.057° < α < 77.143°</p></div><span class="depth">67.6°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-5.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 67.6°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Regime 6, 67.6°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>58</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Regime 6">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 67.6°</p>
+    </article><article class="puzzle" id="bipyramid7-13" data-family="15" data-variant="13">
+    <header><div><a class="case-title" href="#bipyramid7-13">Critical depth</a><p class="interval">α = 77.143°</p></div><span class="depth">77.143°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-13.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 77.143°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Critical depth, 77.143°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>65</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid7-6" data-family="15" data-variant="6">
+    <header><div><a class="case-title" href="#bipyramid7-6">Regime 7</a><p class="interval">77.143° < α < 77.455°</p></div><span class="depth">77.299°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-6.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 77.299°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Regime 7, 77.299°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>72</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Regime 7">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 77.299°</p>
+    </article><article class="puzzle" id="bipyramid7-14" data-family="15" data-variant="14">
+    <header><div><a class="case-title" href="#bipyramid7-14">Critical depth</a><p class="interval">α = 77.455°</p></div><span class="depth">77.455°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-14.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 77.455°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Critical depth, 77.455°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>58</strong> pieces · <strong>7</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Critical depth">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Zero-area pieces omitted</p>
+    </article><article class="puzzle" id="bipyramid7-7" data-family="15" data-variant="7">
+    <header><div><a class="case-title" href="#bipyramid7-7">Regime 8</a><p class="interval">77.455° < α < 90°</p></div><span class="depth">83.727°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-7.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 83.727°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Regime 8, 83.727°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>72</strong> pieces · <strong>8</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Regime 8">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Representative depth · α = 83.727°</p>
+    </article><article class="puzzle" id="bipyramid7-15" data-family="15" data-variant="15">
+    <header><div><a class="case-title" href="#bipyramid7-15">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
+    <div class="sphere"><img src="assets/previews/bipyramid7-15.png" width="440" height="360" loading="lazy" decoding="async" alt="7-gon + poles at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="7-gon + poles, Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
+    <div class="card-tools"><span><strong>28</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset 7-gon + poles, Central cut">Reset view</button></div>
+    <div class="legend" aria-label="Reachable piece classes"></div>
+    <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
+    <p class="case-note">Opposite rays also turn · 16 rays: exceeds 9-axis limit</p>
+    </article></div></section><section class="family" id="jumble"><div class="family-heading"><span class="family-index">17</span><div><h2>Jumbling example (60° apart)</h2><p>Three rays at mutual 60°. Partial turns can unblock a different axis while blocking another.</p></div></div><div class="puzzle-grid"><article class="puzzle" id="jumble-6" data-family="16" data-variant="6">
     <header><div><a class="case-title" href="#jumble-6">Vanishing cut</a><p class="interval">All cuts disappear</p></div><span class="depth">0°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/jumble-6.png" width="440" height="360" loading="lazy" decoding="async" alt="Jumbling example (60° apart) at 0°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Vanishing cut, 0°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>1</strong> pieces · <strong>1</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Jumbling example (60° apart), Vanishing cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">One uncut body · numerical move classes at this angle</p>
-    </article><article class="puzzle" id="jumble-0" data-family="11" data-variant="0">
+    </article><article class="puzzle" id="jumble-0" data-family="16" data-variant="0">
     <header><div><a class="case-title" href="#jumble-0">Regime 1</a><p class="interval">0° < α < 30°</p></div><span class="depth">15°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Regime 1, 15°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/jumble-0.png" width="440" height="360" loading="lazy" decoding="async" alt="Jumbling example (60° apart) at 15°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Regime 1, 15°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>4</strong> pieces · <strong>4</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Jumbling example (60° apart), Regime 1">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 15° · numerical move classes at this angle</p>
-    </article><article class="puzzle" id="jumble-3" data-family="11" data-variant="3">
+    </article><article class="puzzle" id="jumble-3" data-family="16" data-variant="3">
     <header><div><a class="case-title" href="#jumble-3">Critical depth</a><p class="interval">α = 30°</p></div><span class="depth">30°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Critical depth, 30°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/jumble-3.png" width="440" height="360" loading="lazy" decoding="async" alt="Jumbling example (60° apart) at 30°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Critical depth, 30°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>5</strong> pieces · <strong>5</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Jumbling example (60° apart), Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted · numerical move classes at this angle</p>
-    </article><article class="puzzle" id="jumble-1" data-family="11" data-variant="1">
+    </article><article class="puzzle" id="jumble-1" data-family="16" data-variant="1">
     <header><div><a class="case-title" href="#jumble-1">Regime 2</a><p class="interval">30° < α < 35.264°</p></div><span class="depth">32.632°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Regime 2, 32.632°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/jumble-1.png" width="440" height="360" loading="lazy" decoding="async" alt="Jumbling example (60° apart) at 32.632°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Regime 2, 32.632°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>8</strong> pieces · <strong>6</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Jumbling example (60° apart), Regime 2">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 32.632° · numerical move classes at this angle</p>
-    </article><article class="puzzle" id="jumble-4" data-family="11" data-variant="4">
+    </article><article class="puzzle" id="jumble-4" data-family="16" data-variant="4">
     <header><div><a class="case-title" href="#jumble-4">Critical depth</a><p class="interval">α = 35.264°</p></div><span class="depth">35.264°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Critical depth, 35.264°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/jumble-4.png" width="440" height="360" loading="lazy" decoding="async" alt="Jumbling example (60° apart) at 35.264°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Critical depth, 35.264°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>7</strong> pieces · <strong>5</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Jumbling example (60° apart), Critical depth">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Zero-area pieces omitted · numerical move classes at this angle</p>
-    </article><article class="puzzle" id="jumble-2" data-family="11" data-variant="2">
+    </article><article class="puzzle" id="jumble-2" data-family="16" data-variant="2">
     <header><div><a class="case-title" href="#jumble-2">Regime 3</a><p class="interval">35.264° < α < 90°</p></div><span class="depth">62.632°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Regime 3, 62.632°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/jumble-2.png" width="440" height="360" loading="lazy" decoding="async" alt="Jumbling example (60° apart) at 62.632°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Regime 3, 62.632°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>8</strong> pieces · <strong>6</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Jumbling example (60° apart), Regime 3">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
     <p class="case-note">Representative depth · α = 62.632° · numerical move classes at this angle</p>
-    </article><article class="puzzle" id="jumble-5" data-family="11" data-variant="5">
+    </article><article class="puzzle" id="jumble-5" data-family="16" data-variant="5">
     <header><div><a class="case-title" href="#jumble-5">Central cut</a><p class="interval">α = 90°</p></div><span class="depth">90°</span></header>
-    <canvas width="440" height="360" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas>
+    <div class="sphere"><img src="assets/previews/jumble-5.png" width="440" height="360" loading="lazy" decoding="async" alt="Jumbling example (60° apart) at 90°, colored by legal-move class"><canvas width="1" height="1" tabindex="0" role="img" aria-label="Jumbling example (60° apart), Central cut, 90°. Drag or use arrow keys to rotate; tap a piece to highlight its class."></canvas></div>
     <div class="card-tools"><span><strong>8</strong> pieces · <strong>4</strong> classes</span><button class="reset" title="Reset this view" aria-label="Reset Jumbling example (60° apart), Central cut">Reset view</button></div>
     <div class="legend" aria-label="Reachable piece classes"></div>
     <p class="detail" aria-live="polite">Select a piece or color to inspect its class.</p>
@@ -582,7 +995,7 @@
 <section id="method" class="method"><p class="eyebrow">READING THE ATLAS</p><h2>Axes, sectors, and legal moves</h2>
 <div class="method-grid"><div><h3>One ray, one cone</h3><p>An axis is a directed ray from the center. With unit direction <i>u</i>, its moving cap is <span class="formula">u · x &gt; cos α</span> on the unit sphere. Every axis has the same half-angle. Connected regions between the cut circles are separate pieces, even when they lie in the same set of caps.</p><p>The spherical surface shows angular sectors. Imagine a generic asymmetric radial exterior: every piece’s position and orientation matter, even when it shares a color with another piece.</p></div>
 <div><h3>What a shared color means</h3><p>A whole piece can be carried into the other piece’s sector by a sequence of legal rigid turns, with its complete cut geometry fitting that slot. We compute reachability from moves, not from visual similarity or the number of neighboring axes.</p><p>Single-piece classes keep their own colors. A shared color does not mean two pieces are interchangeable in a solved asymmetric exterior, or that any arbitrary permutation of a class is achievable.</p></div>
-<div><h3>Why these configurations?</h3><p>The eleven standard configurations satisfy a specific rule: every axis admits a nonidentity rotation preserving the entire axis set. This is a finite catalogue under that rule, not an exhaustive list under every possible local rule for twisty puzzles. The three-axis jumbling example illustrates the wider possibilities.</p><p>At 90°, the other half of each cut can turn too. These extra directed axes are counted and shown; endpoints with more than seven axes are explicitly marked.</p></div>
+<div><h3>Why these configurations?</h3><p>The 16 standard configurations satisfy a specific rule: every axis admits a nonidentity rotation preserving the entire axis set. This is a finite catalogue under that rule, not an exhaustive list under every possible local rule for twisty puzzles. The three-axis jumbling example illustrates the wider possibilities.</p><p>At 90°, the other half of each cut can turn too. These extra directed axes are counted and shown; endpoints with more than 9 axes are explicitly marked.</p></div>
 <div><h3>Depths and jumbling</h3><p>Open regimes are separated by tangencies and multiple intersections of cut circles. A representative angle is drawn in each interval; the critical angles have their own cards. Piece counts are checked by the circle arrangement’s Euler characteristic.</p><p>Ordinary colors come from the generated move permutations. The jumbling example uses turns checked against the entire current shape of every piece; results at each displayed angle and the precise scope of the reachability calculation are documented in the source.</p></div></div>
-<p class="read-more"><a href="https://github.com/lukacslacko/axes/blob/main/docs/model.md">Mathematical catalogue ↗</a><a href="https://github.com/lukacslacko/axes/blob/main/docs/reachability.md">Reachability calculation ↗</a><a href="https://github.com/lukacslacko/axes">Code &amp; reproducible data ↗</a></p></section>
+<p class="read-more"><a href="https://github.com/lukacslacko/axes/blob/main/docs/catalogue.md">Mathematical catalogue ↗</a><a href="https://github.com/lukacslacko/axes/blob/main/docs/reachability.md">Reachability calculation ↗</a><a href="https://github.com/lukacslacko/axes">Code &amp; reproducible data ↗</a></p></section>
 <footer>Axes · A conical twisty-puzzle atlas <a href="LICENSE">MIT License</a></footer></main></body></html>

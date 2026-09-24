@@ -1,4 +1,6 @@
-# Conical twisty puzzles with at most seven directed axes
+# Original derivation: conical twisty puzzles through seven axes
+
+For the expanded enumeration, see [the current catalogue](catalogue.md).
 
 This is a mathematical catalogue, derived from rotation groups and spherical circle arrangements, rather than from a list of manufactured puzzles.
 

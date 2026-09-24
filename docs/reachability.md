@@ -18,7 +18,7 @@ Every possible nonzero alignment of one cut normal with another about a standard
 
 The reason normal alignment matters: to switch between two intersecting cuts, an open arc of the second cut inside the first cap must be a boundary between rotated pieces. A rotation must therefore carry an existing cut circle to that second cut circle. Returning a piece to an original sector likewise requires its boundary circles to match. Between these angles, a turn can be reversed but creates no additional sector-position equivalence.
 
-The validation checks all moved sectors in both directions, not only their representative points. There are 1,876 cut-normal alignment candidates in the standard configurations including their central limits; all preserve the applicable axis configuration.
+The validation checks all moved sectors in both directions, not only their representative points. Through nine axes, 4,358 cut-normal alignment candidates have been checked, including the central limits; all preserve the applicable axis configuration.
 
 ## Jumbling example
 

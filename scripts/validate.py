@@ -22,7 +22,8 @@ for f in A['families']:
    j=w['piece'];k=w['target'];R=Rs[j]
    assert p.locate(R@p.seeds[j])==k and p.fits(j,R,k) and p.fits(k,R.T,j),(f['key'],v['angle'],w)
    count+=1
-print('Validated',count,'whole-sector move images and jumbling witnesses, and all 82 orbit partitions.')
+cases=sum(len(f['variants']) for f in A['families'])
+print('Validated',count,'whole-sector move images and jumbling witnesses, and all',cases,'orbit partitions.')
 
 # Switching angles on the standard families cannot introduce a new cut normal.
 alignments=0
@@ -54,11 +55,11 @@ class Page(HTMLParser):
   if tag=='article' and d.get('class')=='puzzle':self.cards.append(d)
 page=Page();page.feed(Path('index.html').read_text())
 assert len(page.ids)==len(set(page.ids))
-assert len(page.cards)==page.canvases==sum(len(f['variants']) for f in A['families'])==82
+assert len(page.cards)==page.canvases==cases
 for link in page.links:
  if link.startswith('#'):assert link[1:] in page.ids,link
  elif '://' not in link:assert Path(link).exists(),link
 for card in page.cards:
  f=A['families'][int(card['data-family'])];v=f['variants'][int(card['data-variant'])]
  assert card['id']==f['key']+'-'+card['data-variant']
-print('Validated 82 unique gallery cards, their data references, and navigation targets.')
+print('Validated',cases,'unique gallery cards, their data references, and navigation targets.')
