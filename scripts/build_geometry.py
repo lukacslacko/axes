@@ -4,16 +4,20 @@ import numpy as np
 from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
 
-W,H=2048,1024
-phi=(np.arange(W)+.5)*(2*np.pi/W)-np.pi
-theta=(np.arange(H)+.5)*(np.pi/H)
-st=np.sin(theta)[:,None];ct=np.cos(theta)[:,None]
-X=np.broadcast_to(st*np.cos(phi)[None,:],(H,W)).copy()
-Y=np.broadcast_to(st*np.sin(phi)[None,:],(H,W)).copy()
-Z=np.broadcast_to(ct,(H,W)).copy()
-index=np.arange(W*H,dtype=np.int32).reshape(H,W)
-ch=ct*ct+st*st*np.cos(2*np.pi/W)
-cv=math.cos(np.pi/H)
+def set_grid(width):
+    global W,H,phi,theta,st,ct,X,Y,Z,index,ch,cv
+    W,H=width,width//2
+    phi=(np.arange(W)+.5)*(2*np.pi/W)-np.pi
+    theta=(np.arange(H)+.5)*(np.pi/H)
+    st=np.sin(theta)[:,None];ct=np.cos(theta)[:,None]
+    X=np.broadcast_to(st*np.cos(phi)[None,:],(H,W)).copy()
+    Y=np.broadcast_to(st*np.sin(phi)[None,:],(H,W)).copy()
+    Z=np.broadcast_to(ct,(H,W)).copy()
+    index=np.arange(W*H,dtype=np.int32).reshape(H,W)
+    ch=ct*ct+st*st*np.cos(2*np.pi/W)
+    cv=math.cos(np.pi/H)
+
+set_grid(2048)
 
 def unique_circles(U,alpha):
     if alpha==0:return []
@@ -104,38 +108,47 @@ def atlas(U,alpha,expected):
         out[where]=j+1
     return out,records,len(fullaxes)
 
-names={'one':'Single ray','opposite':'Antipodal pair','ring3':'Triangular ring','ring4':'Square ring','tetra':'Tetrahedral axes','ring5':'Pentagonal ring','bipyramid3':'Triangle + poles','ring6':'Hexagonal ring','bipyramid4':'Octahedral axes','ring7':'Heptagonal ring','bipyramid5':'Pentagon + poles','jumble':'Jumbling example (60° apart)'}
-raw={x['name']:x for x in json.load(open('data/configurations.json'))}
-raw['jumble']=dict(axes=[[1,0,0],[.5,math.sqrt(3)/2,0],[.5,1/(2*math.sqrt(3)),math.sqrt(2/3)]],angles=[30,math.degrees(math.acos(math.sqrt(2/3)))],spherical_regions=[4,8,8])
-result=dict(width=W,height=H,families=[])
-cache={}
-for cache_path in [Path('assets/atlas.json'),Path('work/sphere_atlas.json'),Path('work/sphere_atlas.partial.json')]:
-    if cache_path.exists():
-        for f in json.loads(cache_path.read_text())['families']:
-            for v in f['variants']:cache[(f['key'],v['kind'],round(v['angle'],7))]=(f['axes'],v)
-start=time.time();total=0
-for key,f in raw.items():
-    name=f.get('title',names.get(key,key))
-    f=raw[key];U=np.array(f['axes']);thresholds=[0]+f['angles']+[90]
-    family=dict(key=key,name=name,axes=U.round(10).tolist(),variants=[],symmetry=f.get('symmetry'),construction=f.get('construction'))
-    definitions=[]
-    for i,(lo,hi) in enumerate(zip(thresholds,thresholds[1:])):
-        definitions.append(dict(kind='regime',angle=(lo+hi)/2,low=lo,high=hi,expected=f['spherical_regions'][i],regime=i+1))
-    for a in f['angles']:definitions.append(dict(kind='transition',angle=a,expected=exact_regions(U,a)))
-    definitions += [dict(kind='central',angle=90,expected=exact_regions(U,90)),dict(kind='zero',angle=0,expected=1)]
-    for info in definitions:
-        a=info['angle'];expected=info.pop('expected')
-        assert exact_regions(U,a)==expected,(key,a,expected,exact_regions(U,a))
-        cached=cache.get((key,info['kind'],round(a,7)))
-        if cached and np.max(np.abs(np.array(cached[0])-U))<1e-8 and cached[1]['count']==expected:
-            info.update({k:cached[1][k] for k in ['count','pieces','rays','data']});size=len(base64.b64decode(info['data']))
-        else:
-            pixels,pieces,rays=atlas(U,a,expected)
-            compressed=gzip.compress(pixels.tobytes(),compresslevel=9,mtime=0);size=len(compressed)
-            info.update(count=len(pieces),pieces=pieces,rays=rays,data=base64.b64encode(compressed).decode())
-        family['variants'].append(info);total+=1
-        print(f'{total:02d} {key:12s} {info["kind"]:10s} {a:9.5f}° {info["count"]:2d} pieces {size:6d} bytes {time.time()-start:.1f}s',flush=True)
-    result['families'].append(family)
-    Path('work/sphere_atlas.partial.json').write_text(json.dumps(result,separators=(',',':')))
-Path('work/sphere_atlas.json').write_text(json.dumps(result,separators=(',',':')))
-print('TOTAL',total,'SIZE',Path('work/sphere_atlas.json').stat().st_size,flush=True)
+def main():
+    names={'one':'Single ray','opposite':'Antipodal pair','ring3':'Triangular ring','ring4':'Square ring','tetra':'Tetrahedral axes','ring5':'Pentagonal ring','bipyramid3':'Triangle + poles','ring6':'Hexagonal ring','bipyramid4':'Octahedral axes','ring7':'Heptagonal ring','bipyramid5':'Pentagon + poles','jumble':'Jumbling example (60° apart)'}
+    raw={x['name']:x for x in json.load(open('data/configurations.json'))}
+    raw['jumble']=dict(axes=[[1,0,0],[.5,math.sqrt(3)/2,0],[.5,1/(2*math.sqrt(3)),math.sqrt(2/3)]],angles=[30,math.degrees(math.acos(math.sqrt(2/3)))],spherical_regions=[4,8,8])
+    result=dict(width=W,height=H,families=[])
+    cache={}
+    for cache_path in [Path('assets/atlas.json'),Path('work/sphere_atlas.json'),Path('work/sphere_atlas.partial.json')]:
+        if cache_path.exists():
+            for f in json.loads(cache_path.read_text())['families']:
+                for v in f['variants']:cache[(f['key'],v['kind'],round(v['angle'],7))]=(f['axes'],v)
+    start=time.time();total=0
+    for key,f in raw.items():
+        name=f.get('title',names.get(key,key))
+        f=raw[key];U=np.array(f['axes']);thresholds=[0]+f['angles']+[90]
+        family=dict(key=key,name=name,axes=U.round(10).tolist(),variants=[],symmetry=f.get('symmetry'),construction=f.get('construction'))
+        definitions=[]
+        for i,(lo,hi) in enumerate(zip(thresholds,thresholds[1:])):
+            definitions.append(dict(kind='regime',angle=(lo+hi)/2,low=lo,high=hi,expected=f['spherical_regions'][i],regime=i+1))
+        for a in f['angles']:definitions.append(dict(kind='transition',angle=a,expected=exact_regions(U,a)))
+        definitions += [dict(kind='central',angle=90,expected=exact_regions(U,90)),dict(kind='zero',angle=0,expected=1)]
+        for info in definitions:
+            a=info['angle'];expected=info.pop('expected')
+            assert exact_regions(U,a)==expected,(key,a,expected,exact_regions(U,a))
+            cached=cache.get((key,info['kind'],round(a,7)))
+            if cached and np.max(np.abs(np.array(cached[0])-U))<1e-8 and cached[1]['count']==expected:
+                info.update({k:cached[1][k] for k in ['count','pieces','rays','data','width','height'] if k in cached[1]});size=len(base64.b64decode(info['data']))
+            else:
+                if W!=2048:set_grid(2048)
+                try:pixels,pieces,rays=atlas(U,a,expected)
+                except RuntimeError as first:
+                    print('  Refining the sphere grid:',first,flush=True);set_grid(4096)
+                    pixels,pieces,rays=atlas(U,a,expected)
+                info.update(width=W,height=H)
+                compressed=gzip.compress(pixels.tobytes(),compresslevel=9,mtime=0);size=len(compressed)
+                info.update(count=len(pieces),pieces=pieces,rays=rays,data=base64.b64encode(compressed).decode())
+            family['variants'].append(info);total+=1
+            Path('work/sphere_atlas.partial.json').write_text(json.dumps(dict(width=2048,height=1024,families=result['families']+[family]),separators=(',',':')))
+            print(f'{total:02d} {key:12s} {info["kind"]:10s} {a:9.5f}° {info["count"]:2d} pieces {size:6d} bytes {time.time()-start:.1f}s',flush=True)
+        result['families'].append(family)
+        Path('work/sphere_atlas.partial.json').write_text(json.dumps(result,separators=(',',':')))
+    Path('work/sphere_atlas.json').write_text(json.dumps(result,separators=(',',':')))
+    print('TOTAL',total,'SIZE',Path('work/sphere_atlas.json').stat().st_size,flush=True)
+
+if __name__=='__main__':main()

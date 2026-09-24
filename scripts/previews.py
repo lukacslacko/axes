@@ -25,6 +25,9 @@ for f in A['families']:
   key=f'{f["key"]}-{vi}';filename=dest/(key+'.png')
   digest=hashlib.sha256(json.dumps([f['axes'],v['angle'],v['data'],v['orbits']],separators=(',',':')).encode()).hexdigest()
   if filename.exists() and manifest.get(key)==digest:continue
+  W=v.get('width',A['width']);H=v.get('height',A['height'])
+  tx=(np.floor((np.arctan2(world[:,:,1],world[:,:,0])/(2*np.pi)+.5)*W).astype(int))%W
+  ty=np.minimum(H-1,np.floor(np.arccos(np.clip(world[:,:,2],-1,1))/np.pi*H).astype(int))
   pixels=np.frombuffer(gzip.decompress(base64.b64decode(v['data'])),np.uint8).reshape(H,W)
   masks=np.array([-1]+[p['mask'] for p in v['pieces']]);signature=np.zeros((height,width),np.int32);edge=np.ones((height,width))
   h=math.cos(math.radians(v['angle']))

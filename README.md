@@ -4,15 +4,17 @@
 
 An interactive mathematical catalogue of conical twisty puzzles. All configurations and depths appear on one scrollable page, with jump navigation and an independently rotatable sphere for every case. Pieces share a color when legal turns can carry a whole piece into another piece's angular-sector position.
 
-- **16 standard axis configurations** with at most **9 directed rays**.
-- **59 open cut-arrangement regimes**, their critical depths, and both endpoints.
-- A three-axis jumbling example, giving **141 sphere views** in total.
+- **25 standard axis configurations** with at most **12 directed rays**.
+- **125 open cut-arrangement regimes**, their critical depths, and both endpoints.
+- A three-axis jumbling example, giving **282 sphere views** in total.
 - Whole-sector reachability colors, class highlighting, axis labels, and optional piece IDs.
 - Mouse/touch rotation, arrow buttons and keyboard controls, and automatic light/dark appearance.
 
 This is a finite catalogue under the **global axis-symmetry rule**, not a classification of every possible locally defined or jumbling puzzle. At the central-cut endpoint, opposite rays can also turn; views that consequently exceed the catalogue’s axis bound are marked. Jumbling reachability is calculated numerically at the displayed angle, not asserted constant over an entire arrangement interval.
 
 For the gyrobifastigium and elongated square gyrobicupola, see [the local constructions and their continuous deformation](docs/local-constructions.md).
+
+The axis/depth enumeration is complete through the stated bound. **Full reachability remains unresolved in nine marked cases**; their shared colors are verified and their class counts are displayed as bounds.
 
 See [the current catalogue and completeness argument](docs/catalogue.md), [the mathematical model](docs/model.md) and [the reachability calculation](docs/reachability.md).
 
@@ -30,7 +32,7 @@ Drag to rotate, or focus a sphere and use the arrow keys. `Home` resets its view
 
 ## Reproduce and validate
 
-The shipped HTML and data are precomputed. Regenerating the geometry needs Python 3, NumPy, and SciPy:
+The shipped HTML and data are precomputed. Regenerating the geometry needs Python 3, NumPy, SciPy, and Pillow:
 
 ```sh
 python3 -m venv .venv

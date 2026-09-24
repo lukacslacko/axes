@@ -11,7 +11,7 @@ function hsl(h,s,l){const a=s*Math.min(l,1-l),f=n=>{const k=(n+h/30)%12;return l
 export const colors=Array.from({length:256},(_,i)=>hsl((211+i*137.507764)%360,.61+(i%4)*.055,.58+(((i*3)%5)-2)*.04));
 export const rgb=(c,a=1)=>`rgba(${c.map(x=>Math.round(x*255)).join(',')},${a})`;
 export function pieceAt(state,world,atlas){
- const {family,variant,pixels,masks,fallback}=state;
+ const {family,variant,pixels,masks,fallback}=state;atlas=state;
  const x=Math.floor((Math.atan2(world[1],world[0])/(2*Math.PI)+.5)*atlas.width)%atlas.width,y=Math.min(atlas.height-1,Math.floor(Math.acos(Math.max(-1,Math.min(1,world[2])))/Math.PI*atlas.height));
  let mask=0;family.axes.forEach((u,i)=>{if(dot(u,world)>state.cut)mask|=1<<i;});
  let id=pixels[y*atlas.width+x];
@@ -76,7 +76,7 @@ export function createRenderer(atlas){
   ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,W,H);
   if(gl){
    surface.width=W;surface.height=H;gl.viewport(0,0,W,H);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.useProgram(program);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
-   if(lastState!==state){gl.pixelStorei(gl.UNPACK_ALIGNMENT,1);gl.texImage2D(gl.TEXTURE_2D,0,gl.R8UI,atlas.width,atlas.height,0,gl.RED_INTEGER,gl.UNSIGNED_BYTE,state.pixels);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,maskTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.R32UI,state.masks.length,1,0,gl.RED_INTEGER,gl.UNSIGNED_INT,state.masks);lastState=state;}
+   if(lastState!==state){gl.pixelStorei(gl.UNPACK_ALIGNMENT,1);gl.texImage2D(gl.TEXTURE_2D,0,gl.R8UI,state.width,state.height,0,gl.RED_INTEGER,gl.UNSIGNED_BYTE,state.pixels);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,maskTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.R32UI,state.masks.length,1,0,gl.RED_INTEGER,gl.UNSIGNED_INT,state.masks);lastState=state;}
    gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,maskTexture);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,colorTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA8,palette.length,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array(palette.flatMap(c=>[...c.map(x=>Math.round(x*255)),255])));
    const inv=inverse(state.q),matrix=[...applyQ(inv,[1,0,0]),...applyQ(inv,[0,1,0]),...applyQ(inv,[0,0,1])];
    gl.uniform2f(uniforms.Size,W,H);gl.uniform1f(uniforms.Radius,r*dpr);gl.uniformMatrix3fv(uniforms.Camera,false,new Float32Array(matrix));gl.uniform1i(uniforms.Atlas,0);gl.uniform1i(uniforms.Count,state.family.axes.length);gl.uniform1i(uniforms.Pieces,state.variant.count);gl.uniform1i(uniforms.Masks,1);gl.uniform1i(uniforms.Colors,2);gl.uniform1f(uniforms.Cut,state.cut);gl.uniform1f(uniforms.Angle,state.variant.angle);gl.uniform3fv(uniforms.Ink,new Float32Array(ink));gl.uniform3fv(uniforms.Axes,new Float32Array(state.family.axes.flat().concat(Array(36-state.family.axes.length*3).fill(0))));gl.drawArrays(gl.TRIANGLES,0,3);ctx.drawImage(surface,0,0);

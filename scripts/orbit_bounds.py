@@ -48,7 +48,7 @@ def bounds(p):
  return groups(p.N,perms),anchored
 
 if __name__=='__main__':
- atlas=json.loads(Path('work/orbit_atlas.json').read_text())
+ atlas=json.loads(Path('work/searched_atlas.json').read_text())
  for f in atlas['families']:
   if f['key']!='jumble':continue
   for v in f['variants']:

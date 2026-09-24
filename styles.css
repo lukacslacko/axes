@@ -13,3 +13,5 @@
 .sphere{position:relative;aspect-ratio:11/9;width:100%}.sphere>img{display:block;width:100%;height:100%;object-fit:contain}.sphere>canvas{position:absolute;inset:0;width:100%;height:100%;max-height:none!important;opacity:0}
 
 .local-constructions{border-top:1px solid var(--border);margin-top:26px;padding-top:24px}.table-scroll{overflow:auto;margin:15px 0 18px}table{border-collapse:collapse;width:100%;font-size:14px;text-align:left}th,td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}th{font-weight:600;color:var(--ink)}td{color:var(--muted)}
+
+.reachability-status{font-size:14px;color:var(--muted);margin:15px 0 0}.orbit-warning{font-size:13px;line-height:1.5;color:var(--ink);border-left:3px solid #c18a23;background:var(--bg);margin:10px 20px 0;padding:8px 10px}.orbit-warning a{white-space:nowrap}

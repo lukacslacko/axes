@@ -39,6 +39,12 @@ The 90° endpoint adds the opposite rays and deduplicates their planes. Some end
 
 See [the original model and derivation](model.md) and [the reachability calculation](reachability.md) for the angular sector model, legal turns, and numerical limitations.
 '''
+doc+='\n## Reachability frontier\n\nThe axis configurations and initial cut-arrangement regimes are fully enumerated. Further orbit mergers remain unresolved in these explicitly marked cases:\n\n| Configuration | Displayed angle | Bounds on class count |\n|---|---:|---:|\n'
+for f in families:
+ for vi,v in enumerate(f['variants']):
+  if v.get('orbitStatus')=='regular-only':
+   doc+=f'| [{f["name"]}](https://lukacslacko.github.io/axes/#{f["key"]}-{vi}) | {fmt(v["angle"])} | {len(v["geometricUpperBound"])}–{len(v["orbits"])} |\n'
+doc+='\nShared colors in these cases are established by legal sequences; different colors may still merge. The remaining cases have completed numerical reachability calculations at the displayed angles. Move-state thresholds can further subdivide initial arrangement intervals. See [the reachability methods](reachability.md).\n'
 Path('docs/catalogue.md').write_text(doc)
 readme=Path('README.md').read_text();import re
 readme=re.sub(r'- Eleven standard axis configurations with at most seven directed rays\.',f'- **{len(families)} standard axis configurations** with at most **{limit} directed rays**.',readme)
@@ -48,5 +54,7 @@ readme=re.sub(r'- \*\*\d+ open cut-arrangement regimes\*\*, their critical depth
 readme=re.sub(r'\*\*\d+ sphere views\*\*',f'**{cases} sphere views**',readme)
 readme=readme.replace('See [the mathematical model]', 'See [the current catalogue and completeness argument](docs/catalogue.md), [the mathematical model]') if 'current catalogue' not in readme else readme
 readme=readme.replace('Each card keeps a 2D image and its own camera; the decompressed atlas cache is bounded.','Every card has a pre-rendered mathematical preview and its own camera; live canvas buffers are retained only near the viewport, and the decompressed atlas cache is bounded.')
+readme=readme.replace('Regenerating the geometry needs Python 3, NumPy, and SciPy:', 'Regenerating the geometry needs Python 3, NumPy, SciPy, and Pillow:')
+if 'nine marked cases' not in readme:readme=readme.replace('See [the current catalogue', 'The axis/depth enumeration is complete through the stated bound. **Full reachability remains unresolved in nine marked cases**; their shared colors are verified and their class counts are displayed as bounds.\n\nSee [the current catalogue')
 Path('README.md').write_text(readme)
 print(limit,'axis limit;',len(families),'standard configurations;',regimes,'regimes;',cases,'views')

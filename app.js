@@ -13,7 +13,7 @@ async function start(){
   const bytes=Uint8Array.from(atob(state.variant.data),c=>c.charCodeAt(0));
   const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
   state.pixels=new Uint8Array(await new Response(stream).arrayBuffer());
-  if(state.pixels.length!==atlas.width*atlas.height)throw Error('Unexpected sphere data size.');
+  if(state.pixels.length!==state.width*state.height)throw Error('Unexpected sphere data size.');
   cache.set(state,true);while(cache.size>10){const first=cache.keys().next().value;first.pixels=null;cache.delete(first);}
  }
  async function pump(){
@@ -32,7 +32,7 @@ async function start(){
   state.card.querySelectorAll('.legend button').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===state.selected)));
   const detail=state.card.querySelector('.detail');
   if(state.selected<0)detail.textContent='Select a piece or color to inspect its class.';
-  else{const members=state.variant.orbits[state.selected];detail.textContent=`Class ${state.selected+1} · ${members.map(i=>'P'+(i+1)).join(', ')}${members.length===1?' · stays in its own position':''}`;
+  else{const members=state.variant.orbits[state.selected];detail.textContent=`Class ${state.selected+1} · ${members.map(i=>'P'+(i+1)).join(', ')}${members.length===1?(state.variant.orbitStatus==='regular-only'?' · no transfer established yet':' · stays in its own position'):''}`;
    if(piece){const p=state.variant.pieces[piece-1];detail.textContent+=` · P${piece}: ${p.members.length?'in caps '+p.members.map(i=>'A'+i).join(', '):'stationary'}`;}}
   schedule(state,true);
  }
@@ -43,7 +43,7 @@ async function start(){
   variant.pieces.forEach((p,i)=>{masks[i+1]=p.mask;if(!fallback[p.mask])fallback[p.mask]=i+1;});
   variant.orbits.forEach((group,i)=>group.forEach(j=>classes[j+1]=i));
   if(variant.angle===90)family.axes.forEach(u=>{const v=u.map(x=>-x);if(!fullAxes.some(w=>Math.hypot(...w.map((x,i)=>x-v[i]))<1e-6))fullAxes.push(v);});
-  const state={card,canvas,family,variant,masks,fallback,classes,fullAxes,cut:Math.cos(variant.angle*Math.PI/180),q:defaultQ(),zoom:1,selected:-1,pixels:null,drawn:false,visible:false};
+  const state={card,canvas,family,variant,width:variant.width||atlas.width,height:variant.height||atlas.height,masks,fallback,classes,fullAxes,cut:Math.cos(variant.angle*Math.PI/180),q:defaultQ(),zoom:1,selected:-1,pixels:null,drawn:false,visible:false};
   states.push(state);canvas.setAttribute('aria-busy','true');
   const legend=card.querySelector('.legend');
   variant.orbits.forEach((group,i)=>{const button=document.createElement('button');button.type='button';button.style.setProperty('--color',rgb(colors[i]));button.innerHTML=`<i aria-hidden="true"></i><span>${group.length}</span>`;button.setAttribute('aria-label',`Class ${i+1}: ${group.length} ${group.length===1?'piece':'pieces'}, ${group.map(j=>'P'+(j+1)).join(', ')}`);button.setAttribute('aria-pressed','false');button.title=`Class ${i+1} · ${group.map(j=>'P'+(j+1)).join(', ')}`;button.addEventListener('click',()=>select(state,i));legend.append(button);});

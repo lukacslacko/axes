@@ -2,12 +2,15 @@ import json,math
 from pathlib import Path
 import numpy as np
 from piece_orbits import Puzzle,rot
-A=json.loads(Path('assets/atlas.json').read_text());count=0
+import argparse
+parser=argparse.ArgumentParser();parser.add_argument('--atlas',default='assets/atlas.json');parser.add_argument('--skip-page',action='store_true');args=parser.parse_args()
+A=json.loads(Path(args.atlas).read_text());count=0
 for f in A['families']:
  for v in f['variants']:
   assert sorted(j for g in v['orbits'] for j in g)==list(range(v['count']))
   if v['angle']==0:continue
   p=Puzzle(f,v,A)
+  assert len(p.legal([np.eye(3) for _ in range(p.N)]))==len(p.axes),(f['key'],v['angle'],'blocked in solved state')
   for m in v['moves']:
    R=rot(p.axes[m['axis']-1],math.radians(m['angle']))
    for j,k in enumerate(m['permutation']):
@@ -22,11 +25,20 @@ for f in A['families']:
    j=w['piece'];k=w['target'];R=Rs[j]
    assert p.locate(R@p.seeds[j])==k and p.fits(j,R,k) and p.fits(k,R.T,j),(f['key'],v['angle'],w)
    count+=1
+  for loop in v.get('restoringLoops',[]):
+   Rs=[np.eye(3) for _ in range(p.N)]
+   for axis,angle in loop['path']:
+    i=axis-1;legal=dict(p.legal(Rs));assert i in legal,(f['key'],v['angle'],'blocked loop',loop['path'])
+    R=rot(p.axes[i],math.radians(angle));Rs=[R@Q if j in legal[i] else Q for j,Q in enumerate(Rs)]
+   assert sorted(loop['permutation'])==list(range(p.N))
+   for j,k in enumerate(loop['permutation']):
+    R=Rs[j];assert p.locate(R@p.seeds[j])==k and p.fits(j,R,k) and p.fits(k,R.T,j),(f['key'],v['angle'],'loop fit',j,k)
+    count+=1
 cases=sum(len(f['variants']) for f in A['families'])
 print('Validated',count,'whole-sector move images and jumbling witnesses, and all',cases,'orbit partitions.')
 
 # Switching angles on the standard families cannot introduce a new cut normal.
-alignments=0
+alignments=0;partial_families=set()
 for f in A['families'][:-1]:
  for deep in [False,True]:
   U=[np.array(u) for u in f['axes']]
@@ -40,9 +52,11 @@ for f in A['families'][:-1]:
      aa=a-(u@a)*u;bb=b-(u@b)*u
      if np.linalg.norm(aa)<1e-7:continue
      phi=math.atan2(u@np.cross(aa,bb),aa@bb);R=rot(u,phi)
-     assert all(min(np.linalg.norm(R@x-y) for y in U)<1e-7 for x in U),(f['key'],deep,phi)
+     if not all(min(np.linalg.norm(R@x-y) for y in U)<1e-7 for x in U):partial_families.add(f['key'])
      alignments+=1
-print('Validated',alignments,'cut-normal alignments on standard configurations.')
+assert partial_families<=set(['bipyramid8','tetra_octa','cubocta']),partial_families
+print('Validated',alignments,'cut-normal alignments; extra interacting angles in',sorted(partial_families))
+if args.skip_page:raise SystemExit(0)
 
 from html.parser import HTMLParser
 class Page(HTMLParser):

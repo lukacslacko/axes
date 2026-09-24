@@ -11,13 +11,13 @@ def rot(u,a):
 class Puzzle:
  def __init__(self,f,v,atlas):
   self.f=f;self.v=v;self.U=np.array(f['axes']);self.alpha=math.radians(v['angle']);self.h=math.cos(self.alpha)
-  self.W=atlas['width'];self.H=atlas['height'];self.labels=np.frombuffer(gzip.decompress(base64.b64decode(v['data'])),np.uint8).reshape(self.H,self.W)
+  self.W=v.get('width',atlas['width']);self.H=v.get('height',atlas['height']);self.labels=np.frombuffer(gzip.decompress(base64.b64decode(v['data'])),np.uint8).reshape(self.H,self.W)
   self.N=v['count'];self.seeds=np.array([p['seed'] for p in v['pieces']]);self.masks=[-1]+[p['mask'] for p in v['pieces']]
   self.axes=list(self.U)
   if v['angle']==90:
    for u in self.U:
     if not any(np.linalg.norm(-u-x)<1e-7 for x in self.axes):self.axes.append(-u)
-  self.axes=np.array(self.axes);self.arcs=None
+  self.axes=np.array(self.axes);self.arcs=None;self.extent_cache={};self.arc_arrays={}
  def locate(self,p):
   p=p/np.linalg.norm(p);m=sum((1<<i) for i,d in enumerate(self.U@p) if d>self.h+1e-11)
   x=int((math.atan2(p[1],p[0])/TAU+.5)*self.W)%self.W;y=min(self.H-1,int(math.acos(np.clip(p[2],-1,1))/np.pi*self.H))
@@ -28,6 +28,21 @@ class Puzzle:
     for dx in range(-r,r+1):
      j=int(self.labels[max(0,min(self.H-1,y+dy)),(x+dx)%self.W])
      if j and self.masks[j]==m:return j-1
+  candidates=[i for i,mask in enumerate(self.masks[1:]) if mask==m]
+  if len(candidates)==1:return candidates[0]
+  # A narrow positive-area tip may have no texel within this neighborhood.
+  # Certify its component by an uncut great-circle path to a known seed.
+  for j in sorted(candidates,key=lambda j:-p@self.seeds[j]):
+   s=self.seeds[j]/np.linalg.norm(self.seeds[j]);c=np.clip(p@s,-1,1);theta=math.acos(c)
+   if theta<1e-9:return j
+   if abs(math.sin(theta))<1e-9:continue
+   tangent=(s-c*p)/math.sin(theta);aa=self.U@p;bb=self.U@tangent;end=self.U@s
+   lo=np.minimum(aa,end);hi=np.maximum(aa,end)
+   phase=np.arctan2(bb,aa)%(2*np.pi);magnitude=np.hypot(aa,bb)
+   hi=np.where(phase<=theta+1e-10,np.maximum(hi,magnitude),hi)
+   phase=(phase+np.pi)%(2*np.pi)
+   lo=np.where(phase<=theta+1e-10,np.minimum(lo,-magnitude),lo)
+   if all(lo[i]>=self.h-2e-8 if m&(1<<i) else hi[i]<=self.h+2e-8 for i in range(len(self.U))):return j
   return -1
  def standard_moves(self):
   moves=[]
@@ -65,15 +80,20 @@ class Puzzle:
     if np.linalg.norm(w-u)<1e-7:continue
     A=w@e;B=w@b;t=self.h*(1-w@u)/s;length=math.hypot(A,B)
     if length<1e-10 or abs(t)>length+1e-8:continue
-    phi=math.atan2(B,A);delta=math.acos(np.clip(t/length,-1,1))
+    ratio=t/length
+    if abs(abs(ratio)-1)<1e-8:ratio=math.copysign(1,ratio)
+    phi=math.atan2(B,A);delta=math.acos(np.clip(ratio,-1,1))
     for a in [(phi-delta)%TAU,(phi+delta)%TAU]:
      if not any(abs((a-c+np.pi)%TAU-np.pi)<1e-7 for c in angles):angles.append(a)
    angles.sort()
    if not angles:angles=[0.]
    for a,z in zip(angles,angles[1:]+[angles[0]+TAU]):
+    if z-a<1e-7:continue
     mid=(a+z)/2;p=self.h*u+s*(math.cos(mid)*e+math.sin(mid)*b);inside=u-self.h*p;inside/=np.linalg.norm(inside)
+    clearance=min([abs(w@p-self.h) for w in circles if np.linalg.norm(w-u)>1e-7]+[1.])
+    epsilon=min(.0015,clearance/4)
     for direction in [-1,1]:
-     p2=p+direction*.0015*inside;p2/=np.linalg.norm(p2);j=self.locate(p2)
+     p2=p+direction*epsilon*inside;p2/=np.linalg.norm(p2);j=self.locate(p2)
      if j<0:
       p2=p+direction*.0001*inside;p2/=np.linalg.norm(p2);j=self.locate(p2)
      assert j>=0,(self.f['key'],self.v['angle'],u,a,z,direction)
@@ -81,6 +101,8 @@ class Puzzle:
   assert all(arcs)
   self.arcs=arcs;return arcs
  def extent(self,j,q):
+  key=(j,*np.round(q,8))
+  if key in self.extent_cache:return self.extent_cache[key]
   values=[];s=math.sin(self.alpha)
   for u,e,b,a,z in self.boundaries()[j]:
    A=q@e;B=q@b;base=self.h*(q@u)
@@ -92,6 +114,7 @@ class Puzzle:
   hi=max(values);lo=min(values)
   if self.locate(q)==j:hi=1.
   if self.locate(-q)==j:lo=-1.
+  self.extent_cache[key]=(lo,hi)
   return lo,hi
  def legal(self,Rs):
   result=[]
