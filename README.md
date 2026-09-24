@@ -12,6 +12,8 @@ An interactive mathematical catalogue of conical twisty puzzles. All configurati
 
 This is a finite catalogue under the **global axis-symmetry rule**, not a classification of every possible locally defined or jumbling puzzle. At the central-cut endpoint, opposite rays can also turn; views that consequently exceed the catalogue’s axis bound are marked. Jumbling reachability is calculated numerically at the displayed angle, not asserted constant over an entire arrangement interval.
 
+For the gyrobifastigium and elongated square gyrobicupola, see [the local constructions and their continuous deformation](docs/local-constructions.md).
+
 See [the current catalogue and completeness argument](docs/catalogue.md), [the mathematical model](docs/model.md) and [the reachability calculation](docs/reachability.md).
 
 ## Run locally
