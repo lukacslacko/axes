@@ -1,6 +1,6 @@
-# Complete global-rule catalogue through 20 axes
+# Complete global-rule catalogue through 24 axes
 
-The rendered atlas contains **45 standard configurations, 375 open common-angle regimes, and 825 views** including critical depths, endpoints, and the two local examples. Counts refer to directed rays, not unoriented lines. All standard configurations are derived from finite rotation groups, without consulting a catalogue of manufactured puzzles.
+The rendered atlas contains **53 standard configurations, 504 open common-angle regimes, and 1178 views** including critical depths, endpoints, and 3 local examples. Counts refer to directed rays, not unoriented lines. All standard configurations are derived from finite rotation groups, without consulting a catalogue of manufactured puzzles.
 
 ## Why the enumeration is complete
 
@@ -63,6 +63,14 @@ Removing these duplicate descriptions leaves exactly the configurations listed b
 | 20 | [18-gon + poles](https://lukacslacko.github.io/axes/#bipyramid18) | 10°, 20°, 30°, 40°, 45°, 45.438549°, 46.780821°, 49.106605°, 50°, 52.54628°, 57.267593°, 60°, 63.434949°, 70°, 71.118279°, 80°, 80.148924° | 21 → 40 → 76 → 112 → 148 → 218 → 218 → 218 → 218 → 254 → 254 → 254 → 290 → 290 → 326 → 326 → 362 → 362 |
 | 20 | [Cube vertices + edge axes](https://lukacslacko.github.io/axes/#cube_edges) | 17.632195°, 30°, 32.443079°, 35.26439°, 45°, 46.377969°, 49.106605°, 50.76848°, 54.73561°, 56.024469°, 60°, 63.434949°, 64.760598°, 68.740529°, 70.528779°, 71.565051°, 72.367805°, 73.148154°, 73.897886°, 77.910678°, 80.970145°, 82.950556° | 21 → 50 → 98 → 98 → 122 → 242 → 242 → 242 → 242 → 266 → 266 → 314 → 314 → 314 → 314 → 314 → 314 → 362 → 362 → 362 → 362 → 362 → 362 |
 | 20 | [Dodecahedral vertices](https://lukacslacko.github.io/axes/#dodeca) | 20.905157°, 35.26439°, 37.377368°, 41.810315°, 54.73561°, 56.794912°, 60.794068°, 69.094843°, 70.528779°, 79.187683°, 84.54528° | 21 → 62 → 182 → 182 → 182 → 302 → 302 → 302 → 362 → 362 → 362 → 362 |
+| 21 | [21-gon ring](https://lukacslacko.github.io/axes/#ring21) | 8.571429°, 17.142857°, 25.714286°, 34.285714°, 42.857143°, 51.428571°, 60°, 68.571429°, 77.142857°, 85.714286° | 22 → 44 → 86 → 128 → 170 → 212 → 254 → 296 → 338 → 380 → 422 |
+| 21 | [19-gon + poles](https://lukacslacko.github.io/axes/#bipyramid19) | 9.473684°, 18.947368°, 28.421053°, 37.894737°, 45°, 45.393396°, 46.595032°, 47.368421°, 48.66922°, 51.721599°, 55.890939°, 56.842105°, 61.323627°, 66.315789°, 68.114898°, 75.789474°, 76.207461°, 85.263158°, 85.279263° | 22 → 42 → 80 → 118 → 156 → 230 → 230 → 230 → 268 → 268 → 268 → 268 → 306 → 306 → 344 → 344 → 382 → 382 → 420 → 420 |
+| 22 | [22-gon ring](https://lukacslacko.github.io/axes/#ring22) | 8.181818°, 16.363636°, 24.545455°, 32.727273°, 40.909091°, 49.090909°, 57.272727°, 65.454545°, 73.636364°, 81.818182° | 23 → 46 → 90 → 134 → 178 → 222 → 266 → 310 → 354 → 398 → 442 |
+| 22 | [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20) | 9°, 18°, 27°, 36°, 45°, 45.354883°, 46.436999°, 48.298754°, 51.026553°, 54°, 54.73561°, 59.553616°, 63°, 65.582403°, 72°, 72.827962°, 81°, 81.109024° | 23 → 44 → 84 → 124 → 164 → 282 → 282 → 282 → 282 → 282 → 322 → 322 → 322 → 362 → 362 → 402 → 402 → 442 → 442 |
+| 23 | [23-gon ring](https://lukacslacko.github.io/axes/#ring23) | 7.826087°, 15.652174°, 23.478261°, 31.304348°, 39.130435°, 46.956522°, 54.782609°, 62.608696°, 70.434783°, 78.26087°, 86.086957° | 24 → 48 → 94 → 140 → 186 → 232 → 278 → 324 → 370 → 416 → 462 → 508 |
+| 23 | [21-gon + poles](https://lukacslacko.github.io/axes/#bipyramid21) | 8.571429°, 17.142857°, 25.714286°, 34.285714°, 42.857143°, 45°, 45.321767°, 46.301436°, 47.982133°, 50.435162°, 51.428571°, 53.756651°, 58.056881°, 60°, 63.434949°, 68.571429°, 69.930678°, 77.142857°, 77.454884°, 85.714286°, 85.726225° | 24 → 46 → 88 → 130 → 172 → 214 → 296 → 296 → 296 → 296 → 296 → 338 → 338 → 338 → 380 → 380 → 422 → 422 → 464 → 464 → 506 → 506 |
+| 24 | [24-gon ring](https://lukacslacko.github.io/axes/#ring24) | 7.5°, 15°, 22.5°, 30°, 37.5°, 45°, 52.5°, 60°, 67.5°, 75°, 82.5° | 25 → 50 → 98 → 146 → 194 → 242 → 290 → 338 → 386 → 434 → 482 → 530 |
+| 24 | [22-gon + poles](https://lukacslacko.github.io/axes/#bipyramid22) | 8.181818°, 16.363636°, 24.545455°, 32.727273°, 40.909091°, 45°, 45.293083°, 46.184261°, 47.709342°, 49.090909°, 49.927657°, 52.919851°, 56.780785°, 57.272727°, 61.602534°, 65.454545°, 67.441268°, 73.636364°, 74.265744°, 81.818182°, 81.90035° | 25 → 48 → 92 → 136 → 180 → 224 → 310 → 310 → 310 → 310 → 354 → 354 → 354 → 354 → 398 → 398 → 442 → 442 → 486 → 486 → 530 → 530 |
 
 Each pair tangency is at half the angle between its rays. Every consistent triple of circle equations contributes its sphere-incidence angle; duplicate events are merged. Higher-order coincidences are already among these triple events. These events exhaust the changes of a finite equal-radius small-circle arrangement away from the 0° and 90° endpoints. Each open interval is represented by its midpoint in angle, with every critical value also rendered separately.
 
@@ -81,6 +89,7 @@ These examples are outside the finite global-rule enumeration. Their cut depths 
 | Rays | Configuration | Critical half-angles | Piece counts in successive open regimes |
 |---:|---|---|---|
 | 8 | [Gyrobifastigium vertices](https://lukacslacko.github.io/axes/#gyrobifastigium) | 30°, 34.647594°, 45°, 46.550524°, 55.352406°, 56.789089°, 65.65713°, 69.295189°, 70.713675°, 76.102114° | 9 → 11 → 22 → 30 → 30 → 46 → 46 → 46 → 54 → 54 → 54 |
+| 24 | [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola) | 20.94102°, 24.374417°, 30.361193°, 41.330505°, 41.882041°, 43.313857°, 48.669495°, 49.911268°, 50.635326°, 53.394417°, 59.638807°, 60.120981°, 60.722387°, 62.161922°, 63.186216°, 63.774708°, 64.542003°, 65.019516°, 65.961365°, 66.556145°, 69.05898°, 69.427116°, 70.35484°, 72.087958°, 73.511774°, 75.404795°, 75.963757°, 77.901715°, 78.847144°, 79.056078°, 79.314273°, 79.921933°, 80.545977°, 82.661009°, 85.096804°, 85.190507°, 85.577721°, 86.203858°, 86.792346°, 87.517969°, 88.346215°, 88.509026° | 25 → 98 → 98 → 170 → 266 → 266 → 266 → 362 → 362 → 362 → 362 → 426 → 426 → 426 → 442 → 442 → 442 → 442 → 442 → 442 → 442 → 522 → 522 → 522 → 522 → 522 → 522 → 522 → 522 → 538 → 538 → 538 → 538 → 538 → 538 → 538 → 538 → 538 → 538 → 538 → 538 → 538 → 538 |
 | 3 | [Jumbling example (60° apart)](https://lukacslacko.github.io/axes/#jumble) | 30°, 35.26439° | 4 → 8 → 8 |
 
 ## Reachability frontier
@@ -228,6 +237,34 @@ The axis configurations and initial cut-arrangement regimes are fully enumerated
 | [Dodecahedral vertices](https://lukacslacko.github.io/axes/#dodeca-21) | 79.187683° | ≤ 6 |
 | [Dodecahedral vertices](https://lukacslacko.github.io/axes/#dodeca-22) | 84.54528° | ≤ 7 |
 | [Dodecahedral vertices](https://lukacslacko.github.io/axes/#dodeca-23) | 90° | ≤ 3 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-5) | 45.177442° | ≤ 72 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-6) | 45.895941° | ≤ 33 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-7) | 47.367876° | ≤ 14 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-8) | 49.662653° | ≤ 13 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-9) | 52.513276° | ≤ 12 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-10) | 54.367805° | ≤ 14 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-11) | 57.144613° | ≤ 13 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-12) | 61.276808° | ≤ 12 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-13) | 64.291201° | ≤ 14 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-14) | 68.791201° | ≤ 13 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-15) | 72.413981° | ≤ 15 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-16) | 76.913981° | ≤ 14 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-17) | 81.054512° | ≤ 16 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-18) | 85.554512° | ≤ 15 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-24) | 45.354883° | ≤ 32 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-25) | 46.436999° | ≤ 13 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-26) | 48.298754° | ≤ 12 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-27) | 51.026553° | ≤ 11 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-28) | 54° | ≤ 12 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-29) | 54.73561° | ≤ 12 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-30) | 59.553616° | ≤ 11 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-31) | 63° | ≤ 13 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-32) | 65.582403° | ≤ 12 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-33) | 72° | ≤ 13 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-34) | 72.827962° | ≤ 13 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-35) | 81° | ≤ 15 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-36) | 81.109024° | ≤ 14 |
+| [20-gon + poles](https://lukacslacko.github.io/axes/#bipyramid20-37) | 90° | ≤ 1 |
 | [Gyrobifastigium vertices](https://lukacslacko.github.io/axes/#gyrobifastigium-2) | 39.823797° | ≤ 18 |
 | [Gyrobifastigium vertices](https://lukacslacko.github.io/axes/#gyrobifastigium-3) | 45.775262° | ≤ 23 |
 | [Gyrobifastigium vertices](https://lukacslacko.github.io/axes/#gyrobifastigium-4) | 50.951465° | ≤ 20 |
@@ -246,5 +283,89 @@ The axis configurations and initial cut-arrangement regimes are fully enumerated
 | [Gyrobifastigium vertices](https://lukacslacko.github.io/axes/#gyrobifastigium-19) | 70.713675° | ≤ 20 |
 | [Gyrobifastigium vertices](https://lukacslacko.github.io/axes/#gyrobifastigium-20) | 76.102114° | ≤ 21 |
 | [Gyrobifastigium vertices](https://lukacslacko.github.io/axes/#gyrobifastigium-21) | 90° | ≤ 6 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-1) | 22.657719° | ≤ 98 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-2) | 27.367805° | ≤ 98 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-3) | 35.845849° | ≤ 170 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-4) | 41.606273° | ≤ 266 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-5) | 42.597949° | ≤ 266 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-6) | 45.991676° | ≤ 266 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-7) | 49.290382° | ≤ 362 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-8) | 50.273297° | ≤ 362 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-9) | 52.014871° | ≤ 362 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-10) | 56.516612° | ≤ 362 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-11) | 59.879894° | ≤ 426 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-12) | 60.421684° | ≤ 426 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-13) | 61.442154° | ≤ 426 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-14) | 62.674069° | ≤ 442 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-15) | 63.480462° | ≤ 442 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-16) | 64.158355° | ≤ 442 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-17) | 64.78076° | ≤ 442 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-18) | 65.49044° | ≤ 442 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-19) | 66.258755° | ≤ 442 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-20) | 67.807562° | ≤ 442 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-21) | 69.243048° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-22) | 69.890978° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-23) | 71.221399° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-24) | 72.799866° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-25) | 74.458285° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-26) | 75.684276° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-27) | 76.932736° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-28) | 78.37443° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-29) | 78.951611° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-30) | 79.185175° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-31) | 79.618103° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-32) | 80.233955° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-33) | 81.603493° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-34) | 83.878906° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-35) | 85.143656° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-36) | 85.384114° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-37) | 85.890789° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-38) | 86.498102° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-39) | 87.155157° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-40) | 87.932092° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-41) | 88.427621° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-42) | 89.254513° | ≤ 538 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-44) | 24.374417° | ≤ 90 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-45) | 30.361193° | ≤ 80 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-46) | 41.330505° | ≤ 218 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-47) | 41.882041° | ≤ 194 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-48) | 43.313857° | ≤ 242 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-49) | 48.669495° | ≤ 242 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-50) | 49.911268° | ≤ 314 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-51) | 50.635326° | ≤ 338 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-52) | 53.394417° | ≤ 314 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-53) | 59.638807° | ≤ 394 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-54) | 60.120981° | ≤ 282 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-55) | 60.722387° | ≤ 402 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-56) | 62.161922° | ≤ 434 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-57) | 63.186216° | ≤ 426 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-58) | 63.774708° | ≤ 426 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-59) | 64.542003° | ≤ 434 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-60) | 65.019516° | ≤ 426 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-61) | 65.961365° | ≤ 426 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-62) | 66.556145° | ≤ 418 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-63) | 69.05898° | ≤ 336 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-64) | 69.427116° | ≤ 474 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-65) | 70.35484° | ≤ 474 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-66) | 72.087958° | ≤ 498 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-67) | 73.511774° | ≤ 490 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-68) | 75.404795° | ≤ 506 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-69) | 75.963757° | ≤ 394 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-70) | 77.901715° | ≤ 506 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-71) | 78.847144° | ≤ 530 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-72) | 79.056078° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-73) | 79.314273° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-74) | 79.921933° | ≤ 514 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-75) | 80.545977° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-76) | 82.661009° | ≤ 402 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-77) | 85.096804° | ≤ 530 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-78) | 85.190507° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-79) | 85.577721° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-80) | 86.203858° | ≤ 530 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-81) | 86.792346° | ≤ 506 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-82) | 87.517969° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-83) | 88.346215° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-84) | 88.509026° | ≤ 522 |
+| [Elongated square gyrobicupola vertices](https://lukacslacko.github.io/axes/#gyrobicupola-85) | 90° | ≤ 242 |
 
 Shared colors in these cases are established by legal sequences; different colors may still merge. New partial-turn cases intentionally use ordinary generators without an exhaustive search. Earlier verified state-search results are retained. The remaining cases have completed numerical reachability calculations at the displayed angles. Move-state thresholds can further subdivide initial arrangement intervals. See [the reachability methods](reachability.md).

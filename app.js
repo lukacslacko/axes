@@ -35,6 +35,7 @@ async function start(){
   variant.pieces.forEach((p,i)=>{state.masks[i+1]=p.mask;(state.fallback[p.mask]??=[]).push(i+1);});
   variant.orbits.forEach((group,i)=>group.forEach(j=>state.classes[j+1]=i));
   const legend=card.querySelector('.legend');
+  if(variant.orbits.length>48){legend.classList.add('legend-scroll');legend.setAttribute('aria-label','Reachable piece classes; scroll for more');}
   variant.orbits.forEach((group,i)=>{const button=document.createElement('button');button.type='button';button.style.setProperty('--color',rgb(colors[i]));button.innerHTML=`<i aria-hidden="true"></i><span>${group.length}</span>`;button.setAttribute('aria-label',`Class ${i+1}: ${group.length} ${group.length===1?'piece':'pieces'}, ${group.map(j=>'P'+(j+1)).join(', ')}`);button.setAttribute('aria-pressed','false');button.title=`Class ${i+1} · ${group.map(j=>'P'+(j+1)).join(', ')}`;button.addEventListener('click',()=>select(state,i));legend.append(button);});
  }
  async function pump(){

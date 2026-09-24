@@ -6,7 +6,7 @@ limit=max(len(f['axes']) for f in families);regimes=sum(v['kind']=='regime' for 
 fmt=lambda a:f'{a:.6f}'.rstrip('0').rstrip('.')+'°'
 doc=f'''# Complete global-rule catalogue through {limit} axes
 
-The rendered atlas contains **{len(families)} standard configurations, {regimes} open common-angle regimes, and {cases} views** including critical depths, endpoints, and the two local examples. Counts refer to directed rays, not unoriented lines. All standard configurations are derived from finite rotation groups, without consulting a catalogue of manufactured puzzles.
+The rendered atlas contains **{len(families)} standard configurations, {regimes} open common-angle regimes, and {cases} views** including critical depths, endpoints, and {len(A["families"])-len(families)} local examples. Counts refer to directed rays, not unoriented lines. All standard configurations are derived from finite rotation groups, without consulting a catalogue of manufactured puzzles.
 
 ## Why the enumeration is complete
 
@@ -63,6 +63,6 @@ readme=readme.replace('Each card keeps a 2D image and its own camera; the decomp
 readme=readme.replace('Regenerating the geometry needs Python 3, NumPy, and SciPy:', 'Regenerating the geometry needs Python 3, NumPy, SciPy, and Pillow:')
 pending=sum(v.get('orbitStatus')=='regular-only' for f in A['families'] for v in f['variants'])
 readme=re.sub(r'Full reachability remains unresolved in .*? marked cases',f'Full reachability remains unresolved in {pending} marked cases',readme)
-readme=readme.replace('A three-axis jumbling example, giving', 'The three-axis jumbling and eight-axis gyrobifastigium examples, giving')
+readme=re.sub(r'- (?:The three-axis jumbling and eight-axis gyrobifastigium examples|A three-axis jumbling example|\*\*\d+ local examples\*\*), giving',f'- **{len(A["families"])-len(families)} local examples**, giving',readme)
 Path('README.md').write_text(readme)
 print(limit,'axis limit;',len(families),'standard configurations;',regimes,'regimes;',cases,'views')

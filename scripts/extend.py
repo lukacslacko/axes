@@ -7,11 +7,11 @@ import argparse,json,math,subprocess,sys,time
 from pathlib import Path
 import numpy as np
 from configurations import enumerate_configs,critical,count_generic
-from local_examples import gyrobifastigium,rotations
+from local_examples import gyrobifastigium,gyrobicupola,rotations
 from piece_orbits import Puzzle,groups
 
 parser=argparse.ArgumentParser()
-parser.add_argument('--max-axes',type=int,default=20)
+parser.add_argument('--max-axes',type=int,default=24)
 parser.add_argument('--skip-geometry',action='store_true')
 args=parser.parse_args()
 configs=enumerate_configs(args.max_axes)
@@ -19,6 +19,11 @@ U=gyrobifastigium();events=critical(U);ends=[0]+events+[90]
 configs.append(dict(name='gyrobifastigium',title='Gyrobifastigium vertices',axes=U.tolist(),angles=events,
  spherical_regions=[count_generic(U,(a+b)/2) for a,b in zip(ends,ends[1:])],scope='local',
  construction='Vertex rays of two triangular prisms joined along a square, with perpendicular ridges.'))
+if args.max_axes>=24:
+ U=gyrobicupola();events=critical(U);ends=[0]+events+[90]
+ configs.append(dict(name='gyrobicupola',title='Elongated square gyrobicupola vertices',axes=U.tolist(),angles=events,
+  spherical_regions=[count_generic(U,(a+b)/2) for a,b in zip(ends,ends[1:])],scope='local',
+  construction='Vertex rays of a rhombicuboctahedron with one square cupola turned by 45 degrees.'))
 Path('data/configurations.json').write_text(json.dumps(configs,indent=2)+'\n')
 Path('work').mkdir(exist_ok=True)
 if not args.skip_geometry:

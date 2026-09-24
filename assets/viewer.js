@@ -5,14 +5,14 @@ const options={axes:true,numbers:false};
 const format=a=>Number(a.toFixed(3))+'°';
 
 async function start(){
- const response=await fetch('./assets/index.json?v=a765abc2160a');if(!response.ok)throw Error('The sphere data could not be loaded. Please reload the page.');
+ const response=await fetch('./assets/index.json?v=c3c65b7b1898');if(!response.ok)throw Error('The sphere data could not be loaded. Please reload the page.');
  const atlas=await response.json(),renderer=createRenderer(atlas),states=[],cache=new Map(),queue=[];
  let running=false;
  async function load(state){
   if(state.pixels){cache.delete(state);cache.set(state,true);return;}
   if(state.loading)return state.loading;
   state.loading=(async()=>{
-  const response=await fetch('./assets/views/'+state.family.key+'-'+state.index+'.json?v=a765abc2160a');
+  const response=await fetch('./assets/views/'+state.family.key+'-'+state.index+'.json?v=c3c65b7b1898');
   if(!response.ok)throw Error('This sphere could not be loaded. Try rotating it again.');
   state.variant=await response.json();prepare(state);
   const bytes=Uint8Array.from(atob(state.variant.data),c=>c.charCodeAt(0));
@@ -35,6 +35,7 @@ async function start(){
   variant.pieces.forEach((p,i)=>{state.masks[i+1]=p.mask;(state.fallback[p.mask]??=[]).push(i+1);});
   variant.orbits.forEach((group,i)=>group.forEach(j=>state.classes[j+1]=i));
   const legend=card.querySelector('.legend');
+  if(variant.orbits.length>48){legend.classList.add('legend-scroll');legend.setAttribute('aria-label','Reachable piece classes; scroll for more');}
   variant.orbits.forEach((group,i)=>{const button=document.createElement('button');button.type='button';button.style.setProperty('--color',rgb(colors[i]));button.innerHTML=`<i aria-hidden="true"></i><span>${group.length}</span>`;button.setAttribute('aria-label',`Class ${i+1}: ${group.length} ${group.length===1?'piece':'pieces'}, ${group.map(j=>'P'+(j+1)).join(', ')}`);button.setAttribute('aria-pressed','false');button.title=`Class ${i+1} · ${group.map(j=>'P'+(j+1)).join(', ')}`;button.addEventListener('click',()=>select(state,i));legend.append(button);});
  }
  async function pump(){

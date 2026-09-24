@@ -4,9 +4,9 @@
 
 An interactive mathematical catalogue of conical twisty puzzles. All configurations and depths appear on one scrollable page, with jump navigation and an independently rotatable sphere for every case. Pieces share a color when legal turns can carry a whole piece into another piece's angular-sector position.
 
-- **45 standard axis configurations** with at most **20 directed rays**.
-- **375 open cut-arrangement regimes**, their critical depths, and both endpoints.
-- The three-axis jumbling and eight-axis gyrobifastigium examples, giving **825 sphere views** in total.
+- **53 standard axis configurations** with at most **24 directed rays**.
+- **504 open cut-arrangement regimes**, their critical depths, and both endpoints.
+- **3 local examples**, giving **1178 sphere views** in total.
 - Whole-sector reachability colors, class highlighting, axis labels, and optional piece IDs.
 - Mouse/touch rotation, arrow buttons and keyboard controls, and automatic light/dark appearance.
 
@@ -14,7 +14,7 @@ This is a finite catalogue under the **global axis-symmetry rule**, not a classi
 
 For the gyrobifastigium and elongated square gyrobicupola, see [the local constructions and their continuous deformation](docs/local-constructions.md).
 
-The axis/depth enumeration is complete through the stated bound. **Full reachability remains unresolved in 157 marked cases**; their shared colors are verified and their class counts are displayed as bounds.
+The axis/depth enumeration is complete through the stated bound. **Full reachability remains unresolved in 269 marked cases**; their shared colors are verified and their class counts are displayed as bounds.
 
 See [the current catalogue and completeness argument](docs/catalogue.md), [the mathematical model](docs/model.md) and [the reachability calculation](docs/reachability.md).
 

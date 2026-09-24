@@ -231,7 +231,8 @@ def main():
     for key,f in raw.items():
         name=f.get('title',names.get(key,key))
         f=raw[key];U=np.array(f['axes']);thresholds=[0]+f['angles']+[90]
-        family=dict(key=key,name=name,axes=U.round(10).tolist(),variants=[],symmetry=f.get('symmetry'),construction=f.get('construction'),scope=f.get('scope','local' if key=='jumble' else 'global'))
+        # Rounding the normals can split an exact tangency at a critical depth.
+        family=dict(key=key,name=name,axes=U.tolist(),variants=[],symmetry=f.get('symmetry'),construction=f.get('construction'),scope=f.get('scope','local' if key=='jumble' else 'global'))
         definitions=[]
         for i,(lo,hi) in enumerate(zip(thresholds,thresholds[1:])):
             definitions.append(dict(kind='regime',angle=(lo+hi)/2,low=lo,high=hi,expected=f['spherical_regions'][i],regime=i+1))

@@ -1,4 +1,4 @@
-# New geometry from 13 to 20 axes
+# New geometry from 13 to 24 axes
 
 The great-circle rings and rings with both poles continue at every size. Four additional polyhedral configurations enter the global-rule catalogue:
 
@@ -10,6 +10,14 @@ The great-circle rings and rings with both poles continue at every size. Four ad
 | 20 | Dodecahedral vertices, equivalently icosahedral face-center directions | [Gallery](https://lukacslacko.github.io/axes/#dodeca) |
 
 Each construction is normalized to directed rays; radial distances of the original vertices play no part in the cone arrangement. All rays have the same cut half-angle. The [catalogue](catalogue.md) lists every critical depth and open-regime piece count.
+
+## The extension from 21 to 24 axes
+
+The global rule contributes eight more configurations: a great-circle ring at each of 21, 22, 23, and 24 rays, and a ring of 19, 20, 21, or 22 rays together with both poles. No new tetrahedral, octahedral, or icosahedral pole-orbit union falls in this range; the next is the 26-ray union of all three octahedral pole orbits.
+
+These eight configurations add 129 open arrangement regimes and 266 views including critical depths and endpoints. This brings the global-rule catalogue to 53 configurations and 504 open regimes through 24 rays.
+
+The separate [elongated square gyrobicupola gallery](https://lukacslacko.github.io/axes/#gyrobicupola) adds 43 open regimes, 42 critical depths, and both endpoints. It reaches 538 pieces. It lies outside the global rule and supplies a concrete example of the wider local possibilities. See [its construction and partial-turn witnesses](local-constructions.md). All three local examples together with the global catalogue give 1,178 sphere views.
 
 ## An intrinsic-jumbling witness on dodecahedral rays
 
