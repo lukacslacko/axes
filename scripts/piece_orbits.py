@@ -11,7 +11,7 @@ def rot(u,a):
 class Puzzle:
  def __init__(self,f,v,atlas):
   self.f=f;self.v=v;self.U=np.array(f['axes']);self.alpha=math.radians(v['angle']);self.h=math.cos(self.alpha)
-  self.W=v.get('width',atlas['width']);self.H=v.get('height',atlas['height']);self.labels=np.frombuffer(gzip.decompress(base64.b64decode(v['data'])),np.uint8).reshape(self.H,self.W)
+  self.W=v.get('width',atlas['width']);self.H=v.get('height',atlas['height']);self.labels=np.frombuffer(gzip.decompress(base64.b64decode(v['data'])),np.uint8 if v.get('labelBytes',1)==1 else '<u2').reshape(self.H,self.W)
   self.N=v['count'];self.seeds=np.array([p['seed'] for p in v['pieces']]);self.masks=[-1]+[p['mask'] for p in v['pieces']]
   self.axes=list(self.U)
   if v['angle']==90:
@@ -50,15 +50,18 @@ class Puzzle:
   for i,u in enumerate(self.axes):
    neighbors=np.array([v for v in self.axes if np.linalg.norm(v-u)>1e-7 and np.linalg.norm(v+u)>1e-7 and u@v>math.cos(2*self.alpha)+1e-8])
    if not len(neighbors):continue
-   possible=[]
+   possible=[];seen=set()
    for a in neighbors:
     for b in neighbors:
      if abs(a@u-b@u)>1e-7:continue
      aa=a-(a@u)*u;bb=b-(b@u)*u
      phi=math.atan2(u@np.cross(aa,bb),aa@bb)%TAU
      if phi<1e-7 or phi>TAU-1e-7:continue
+     key=round(phi,7)
+     if key in seen:continue
+     seen.add(key)
      R=rot(u,phi)
-     if all(min(np.linalg.norm(R@v-w) for w in neighbors)<2e-6 for v in neighbors):possible.append(phi)
+     if np.all(np.min(np.linalg.norm((neighbors@R.T)[:,None,:]-neighbors[None,:,:],axis=2),axis=1)<2e-6):possible.append(phi)
    if not possible:continue
    phi=min(possible);R=rot(u,phi);perm=[]
    for j,p in enumerate(self.v['pieces']):

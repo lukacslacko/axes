@@ -18,15 +18,19 @@ def gyrobicupola():
 
 def rotations(U,i,alpha):
  u=U[i];neighbors=[j for j,v in enumerate(U) if j!=i and -1+1e-8<u@v and u@v>math.cos(2*math.radians(alpha))+1e-8]
- found=[]
+ found=[];seen=set()
  for j,k in itertools.permutations(neighbors,2):
   a=U[j];b=U[k]
   if abs(u@a-u@b)>1e-8:continue
   aa=a-(u@a)*u;bb=b-(u@b)*u
   phi=math.atan2(u@np.cross(aa,bb),aa@bb)
   if abs(phi)<1e-8:continue
+  key=round(phi,7)
+  if key in seen:continue
+  seen.add(key)
   R=rot(u,phi)
-  preserved=[m for m in neighbors if any(np.linalg.norm(R@U[n]-U[m])<1e-7 for n in neighbors)]
+  rotated=np.asarray(U)[neighbors]@R.T
+  preserved=[m for m in neighbors if np.min(np.linalg.norm(rotated-U[m],axis=1))<1e-7]
   blocked=[m for m in neighbors if m not in preserved]
   assert np.linalg.norm(R@U[j]-U[k])<1e-7
   found.append(dict(axis=i+1,source=j+1,target=k+1,angle=math.degrees(phi),opens=[m+1 for m in preserved],blocks=[m+1 for m in blocked],regular=not blocked))

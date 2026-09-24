@@ -4,9 +4,9 @@
 
 An interactive mathematical catalogue of conical twisty puzzles. All configurations and depths appear on one scrollable page, with jump navigation and an independently rotatable sphere for every case. Pieces share a color when legal turns can carry a whole piece into another piece's angular-sector position.
 
-- **25 standard axis configurations** with at most **12 directed rays**.
-- **125 open cut-arrangement regimes**, their critical depths, and both endpoints.
-- A three-axis jumbling example, giving **282 sphere views** in total.
+- **34 standard axis configurations** with at most **16 directed rays**.
+- **218 open cut-arrangement regimes**, their critical depths, and both endpoints.
+- The three-axis jumbling and eight-axis gyrobifastigium examples, giving **500 sphere views** in total.
 - Whole-sector reachability colors, class highlighting, axis labels, and optional piece IDs.
 - Mouse/touch rotation, arrow buttons and keyboard controls, and automatic light/dark appearance.
 
@@ -14,7 +14,7 @@ This is a finite catalogue under the **global axis-symmetry rule**, not a classi
 
 For the gyrobifastigium and elongated square gyrobicupola, see [the local constructions and their continuous deformation](docs/local-constructions.md).
 
-The axis/depth enumeration is complete through the stated bound. **Full reachability remains unresolved in nine marked cases**; their shared colors are verified and their class counts are displayed as bounds.
+The axis/depth enumeration is complete through the stated bound. **Full reachability remains unresolved in 43 marked cases**; their shared colors are verified and their class counts are displayed as bounds.
 
 See [the current catalogue and completeness argument](docs/catalogue.md), [the mathematical model](docs/model.md) and [the reachability calculation](docs/reachability.md).
 
@@ -41,7 +41,7 @@ pip install -r requirements.txt
 python3 scripts/rebuild.py
 ```
 
-The complete pipeline builds small-circle arrangements, checks region counts with Euler's formula, computes ordinary move permutations, searches state-dependent jumbling moves, generates HTML, and checks every generated whole-sector move image and jumbling witness. Intermediate files go to the ignored `work/` directory.
+The default pipeline builds small-circle arrangements, checks region counts with Euler's formula, computes ordinary move permutations for new cases, retains earlier partial-turn certificates, generates HTML, and checks every generated whole-sector move image and jumbling witness. New cases with possible additional partial turns are marked as conservative color groups; exhaustive orbit searches are not required for expansion. Intermediate files go to the ignored `work/` directory.
 
 To validate the shipped data alone:
 
@@ -51,7 +51,7 @@ node --check app.js
 node --check renderer.js
 ```
 
-The renderer shares **one WebGL context** between every card. Every card has a pre-rendered mathematical preview and its own camera; live canvas buffers are retained only near the viewport, and the decompressed atlas cache is bounded. No third-party rendering library is used.
+The renderer shares **one WebGL context** between every card. Every card has a pre-rendered mathematical preview and its own camera; live canvas buffers are retained only near the viewport, and the decompressed atlas cache is bounded to 64 MiB. A small manifest loads first, followed by individual sphere data near the viewport. No third-party rendering library is used.
 
 ## License
 

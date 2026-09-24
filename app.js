@@ -5,16 +5,37 @@ const options={axes:true,numbers:false};
 const format=a=>Number(a.toFixed(3))+'°';
 
 async function start(){
- const response=await fetch('./assets/atlas.json');if(!response.ok)throw Error('The sphere data could not be loaded. Please reload the page.');
+ const response=await fetch('./assets/index.json');if(!response.ok)throw Error('The sphere data could not be loaded. Please reload the page.');
  const atlas=await response.json(),renderer=createRenderer(atlas),states=[],cache=new Map(),queue=[];
  let running=false;
  async function load(state){
   if(state.pixels){cache.delete(state);cache.set(state,true);return;}
+  if(state.loading)return state.loading;
+  state.loading=(async()=>{
+  const response=await fetch('./assets/views/'+state.family.key+'-'+state.index+'.json');
+  if(!response.ok)throw Error('This sphere could not be loaded. Try rotating it again.');
+  state.variant=await response.json();prepare(state);
   const bytes=Uint8Array.from(atob(state.variant.data),c=>c.charCodeAt(0));
   const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
-  state.pixels=new Uint8Array(await new Response(stream).arrayBuffer());
+  const buffer=await new Response(stream).arrayBuffer();
+  state.pixels=state.variant.labelBytes===2?new Uint16Array(buffer):new Uint8Array(buffer);
+  delete state.variant.data;
   if(state.pixels.length!==state.width*state.height)throw Error('Unexpected sphere data size.');
-  cache.set(state,true);while(cache.size>10){const first=cache.keys().next().value;first.pixels=null;cache.delete(first);}
+  cache.set(state,true);
+  let used=[...cache.keys()].reduce((n,s)=>n+s.pixels.byteLength,0);
+  while(cache.size>1&&(cache.size>10||used>64*1024*1024)){const first=cache.keys().next().value;used-=first.pixels.byteLength;first.pixels=null;cache.delete(first);}
+  })();
+  try{await state.loading;}finally{state.loading=null;}
+ }
+ function prepare(state){
+  if(state.classes)return;
+  const {variant,card}=state;
+  state.masks=new Uint32Array(variant.count+1);state.masks.fill(-1);
+  state.fallback=Object.create(null);state.classes=new Int32Array(variant.count+1);
+  variant.pieces.forEach((p,i)=>{state.masks[i+1]=p.mask;(state.fallback[p.mask]??=[]).push(i+1);});
+  variant.orbits.forEach((group,i)=>group.forEach(j=>state.classes[j+1]=i));
+  const legend=card.querySelector('.legend');
+  variant.orbits.forEach((group,i)=>{const button=document.createElement('button');button.type='button';button.style.setProperty('--color',rgb(colors[i]));button.innerHTML=`<i aria-hidden="true"></i><span>${group.length}</span>`;button.setAttribute('aria-label',`Class ${i+1}: ${group.length} ${group.length===1?'piece':'pieces'}, ${group.map(j=>'P'+(j+1)).join(', ')}`);button.setAttribute('aria-pressed','false');button.title=`Class ${i+1} · ${group.map(j=>'P'+(j+1)).join(', ')}`;button.addEventListener('click',()=>select(state,i));legend.append(button);});
  }
  async function pump(){
   if(running)return;running=true;
@@ -39,14 +60,10 @@ async function start(){
  function rotate(state,axis,angle){state.q=norm(mul(axisQ(axis,angle),state.q));schedule(state,true);}
  for(const card of document.querySelectorAll('.puzzle')){
   const family=atlas.families[Number(card.dataset.family)],variant=family.variants[Number(card.dataset.variant)],canvas=card.querySelector('canvas');
-  const masks=new Uint32Array(variant.count+1),fallback=new Int32Array(2**family.axes.length),classes=new Int32Array(variant.count+1),fullAxes=family.axes.map(u=>u.slice());masks.fill(-1);
-  variant.pieces.forEach((p,i)=>{masks[i+1]=p.mask;if(!fallback[p.mask])fallback[p.mask]=i+1;});
-  variant.orbits.forEach((group,i)=>group.forEach(j=>classes[j+1]=i));
+  const fullAxes=family.axes.map(u=>u.slice());
   if(variant.angle===90)family.axes.forEach(u=>{const v=u.map(x=>-x);if(!fullAxes.some(w=>Math.hypot(...w.map((x,i)=>x-v[i]))<1e-6))fullAxes.push(v);});
-  const state={card,canvas,family,variant,width:variant.width||atlas.width,height:variant.height||atlas.height,masks,fallback,classes,fullAxes,cut:Math.cos(variant.angle*Math.PI/180),q:defaultQ(),zoom:1,selected:-1,pixels:null,drawn:false,visible:false};
+  const state={card,canvas,family,variant,index:Number(card.dataset.variant),width:variant.width||atlas.width,height:variant.height||atlas.height,fullAxes,cut:Math.cos(variant.angle*Math.PI/180),q:defaultQ(),zoom:1,selected:-1,pixels:null,drawn:false,visible:false};
   states.push(state);canvas.setAttribute('aria-busy','true');
-  const legend=card.querySelector('.legend');
-  variant.orbits.forEach((group,i)=>{const button=document.createElement('button');button.type='button';button.style.setProperty('--color',rgb(colors[i]));button.innerHTML=`<i aria-hidden="true"></i><span>${group.length}</span>`;button.setAttribute('aria-label',`Class ${i+1}: ${group.length} ${group.length===1?'piece':'pieces'}, ${group.map(j=>'P'+(j+1)).join(', ')}`);button.setAttribute('aria-pressed','false');button.title=`Class ${i+1} · ${group.map(j=>'P'+(j+1)).join(', ')}`;button.addEventListener('click',()=>select(state,i));legend.append(button);});
   card.querySelector('.reset').addEventListener('click',()=>{state.q=defaultQ();state.zoom=1;if(state.selected>=0)select(state,state.selected);schedule(state,true);});
   const arrows=document.createElement('div');arrows.className='rotation';arrows.setAttribute('aria-label','Rotate sphere');
   for(const [label,text,axis,angle] of [['left','←',[0,1,0],-.35],['up','↑',[1,0,0],-.35],['down','↓',[1,0,0],.35],['right','→',[0,1,0],.35]]){const button=document.createElement('button');button.type='button';button.textContent=text;button.setAttribute('aria-label','Rotate '+label);button.addEventListener('click',()=>rotate(state,axis,angle));arrows.append(button);}

@@ -1,6 +1,6 @@
 # Beyond global symmetry: the two twisted examples
 
-The complete 12-axis enumeration uses a strong condition: **every selected ray is the axis of a nonidentity rotation of the entire ray set**. This is sufficient for ordinary turns at every depth, but it is not necessary for useful conical puzzles. In particular, it excludes both of the vertex sets proposed in the discussion. Direct coordinate calculations nevertheless give interacting, state-dependent moves for both.
+The finite global-axis enumeration uses a strong condition: **every selected ray is the axis of a nonidentity rotation of the entire ray set**. This is sufficient for ordinary turns at every depth, but it is not necessary for useful conical puzzles. In particular, it excludes both of the vertex sets proposed in the discussion. Direct coordinate calculations nevertheless give interacting, state-dependent moves for both.
 
 The claims below concern the ideal conical sector model. They establish working angular moves and axis switching; they do not supply retention hardware, an exhaustive solution group, or complete piece-equivalence classes for these extra examples.
 
@@ -106,4 +106,4 @@ Again this angle is an irrational multiple of Ï€. The algebraic norm of `2 cos Ï
 
 Run `python3 scripts/local_examples.py`. The script constructs both ray sets, checks each first-turn circle alignment and the opened/blocked axes, and verifies five points in the gyrobifastigium deformation family. Coordinates, move witnesses for every ray, and all initial cut-arrangement critical angles are stored in `data/local-examples.json`.
 
-These two constructions extend the *mathematical investigation*, while the main sphere gallery remains the complete global-rule enumeration through 12 axes plus its original three-axis example. Their full state-dependent move graphs and orbit-colored depth galleries are separate work; the existence of the switches above does not pretend to settle those harder questions.
+These two constructions extend the *mathematical investigation*, and the [gyrobifastigium gallery](https://lukacslacko.github.io/axes/#gyrobifastigium) now includes all its initial cut-arrangement depths, with conservative colors backed by ordinary turns. The 24-axis example remains a documented construction. Full state-dependent reachability for these local families is still separate work; the switches above do not settle those harder questions.

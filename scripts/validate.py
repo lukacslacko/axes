@@ -1,13 +1,19 @@
 import json,math
 from pathlib import Path
 import numpy as np
-from piece_orbits import Puzzle,rot
+from piece_orbits import Puzzle,rot,groups
+from build_geometry import exact_regions
 import argparse
 parser=argparse.ArgumentParser();parser.add_argument('--atlas',default='assets/atlas.json');parser.add_argument('--skip-page',action='store_true');args=parser.parse_args()
 A=json.loads(Path(args.atlas).read_text());count=0
 for f in A['families']:
  for v in f['variants']:
+  assert exact_regions(np.array(f['axes']),v['angle'])==v['count'],(f['key'],v['angle'],'Euler count')
   assert sorted(j for g in v['orbits'] for j in g)==list(range(v['count']))
+  edges=list(v['moves'])+[dict(permutation=w['permutation']) for w in v.get('restoringLoops',[])]
+  for w in v.get('witnesses',[]):
+   perm=list(range(v['count']));j=w['piece'];k=w['target'];perm[j],perm[k]=k,j;edges.append(dict(permutation=perm))
+  assert groups(v['count'],edges)==v['orbits'],(f['key'],v['angle'],'uncertified orbit merger')
   if v['angle']==0:continue
   p=Puzzle(f,v,A)
   assert len(p.legal([np.eye(3) for _ in range(p.N)]))==len(p.axes),(f['key'],v['angle'],'blocked in solved state')
@@ -52,9 +58,10 @@ for f in A['families'][:-1]:
      aa=a-(u@a)*u;bb=b-(u@b)*u
      if np.linalg.norm(aa)<1e-7:continue
      phi=math.atan2(u@np.cross(aa,bb),aa@bb);R=rot(u,phi)
-     if not all(min(np.linalg.norm(R@x-y) for y in U)<1e-7 for x in U):partial_families.add(f['key'])
+     vectors=np.asarray(U)
+     if np.any(np.min(np.linalg.norm((vectors@R.T)[:,None,:]-vectors[None,:,:],axis=2),axis=1)>1e-7):partial_families.add(f['key'])
      alignments+=1
-assert partial_families<=set(['bipyramid8','tetra_octa','cubocta']),partial_families
+assert {'bipyramid8','tetra_octa','cubocta'}<=partial_families
 print('Validated',alignments,'cut-normal alignments; extra interacting angles in',sorted(partial_families))
 if args.skip_page:raise SystemExit(0)
 
@@ -76,4 +83,13 @@ for link in page.links:
 for card in page.cards:
  f=A['families'][int(card['data-family'])];v=f['variants'][int(card['data-variant'])]
  assert card['id']==f['key']+'-'+card['data-variant']
-print('Validated',cases,'unique gallery cards, their data references, and navigation targets.')
+manifest=json.loads(Path('assets/index.json').read_text())
+for fi,f in enumerate(A['families']):
+ assert manifest['families'][fi]['axes']==f['axes']
+ for vi,v in enumerate(f['variants']):
+  key=f['key']+'-'+str(vi)
+  assert Path('assets/previews/'+key+'.png').exists(),key
+  shipped=json.loads(Path('assets/views/'+key+'.json').read_text())
+  assert all(v[k]==value for k,value in shipped.items()),key
+  assert manifest['families'][fi]['variants'][vi]['count']==v['count']
+print('Validated',cases,'unique gallery cards, lazy-loaded views, previews, and navigation targets.')
