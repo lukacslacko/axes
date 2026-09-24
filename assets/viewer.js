@@ -1,18 +1,18 @@
-import {createRenderer,defaultQ,colors,rgb,norm,mul,axisQ,cross,dot,pieceAt,worldAt} from '../renderer.js?v=c293378c9e91';
+import {createRenderer,defaultQ,colors,rgb,norm,mul,axisQ,cross,dot,pieceAt,worldAt} from '../renderer.js?v=c97acc840d8f';
 
 const status=document.querySelector('#status');
 const options={axes:true,numbers:false};
 const format=a=>Number(a.toFixed(3))+'°';
 
 async function start(){
- const response=await fetch('./assets/index.json?v=d951e1244c76');if(!response.ok)throw Error('The sphere data could not be loaded. Please reload the page.');
+ const response=await fetch('./assets/index.json?v=a765abc2160a');if(!response.ok)throw Error('The sphere data could not be loaded. Please reload the page.');
  const atlas=await response.json(),renderer=createRenderer(atlas),states=[],cache=new Map(),queue=[];
  let running=false;
  async function load(state){
   if(state.pixels){cache.delete(state);cache.set(state,true);return;}
   if(state.loading)return state.loading;
   state.loading=(async()=>{
-  const response=await fetch('./assets/views/'+state.family.key+'-'+state.index+'.json?v=d951e1244c76');
+  const response=await fetch('./assets/views/'+state.family.key+'-'+state.index+'.json?v=a765abc2160a');
   if(!response.ok)throw Error('This sphere could not be loaded. Try rotating it again.');
   state.variant=await response.json();prepare(state);
   const bytes=Uint8Array.from(atob(state.variant.data),c=>c.charCodeAt(0));

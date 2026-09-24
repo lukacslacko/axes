@@ -39,6 +39,7 @@ for fi,f in enumerate(A['families']):
     </article>''')
  desc= ('Three rays at mutual 60°. Partial turns can unblock a different axis while blocking another.' if key=='jumble' else f'{len(f["axes"])} directed axes · '+str(sum(v['kind']=='regime' for v in f['variants']))+' open depth regimes')
  if f in local:desc+=' · beyond the global-symmetry rule'
+ if key=='dodeca':desc+=' · <a href="https://github.com/lukacslacko/axes/blob/main/docs/larger-configurations.md">Irrational-angle partial turns ↗</a>'
  sections.append(f'<section class="family" id="{key}"><div class="family-heading"><span class="family-index">{fi+1:02}</span><div><h2>{html.escape(name)}</h2><p>{desc}</p></div></div><div class="puzzle-grid">'+''.join(cards)+'</div></section>')
 page='''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b1423"><meta name="description" content="An interactive mathematical atlas of conical twisty puzzles: up to seven directed axes, all cut-depth regimes, and piece colors determined by legal reachability."><title>Axes — an atlas of conical twisty puzzles</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css"><script type="module" src="app.js"></script></head>

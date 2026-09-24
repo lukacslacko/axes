@@ -12,3 +12,6 @@ for name in ['build_site.py', 'previews.py', 'catalogue_docs.py', 'validate.py']
     print('\n' + name, flush=True)
     subprocess.run([sys.executable, str(root / 'scripts' / name)],
                    cwd=root, check=True)
+if limit>=20:subprocess.run([sys.executable,str(root/'scripts/standard_examples.py')],cwd=root,check=True)
+import shutil
+if shutil.which('node'):subprocess.run(['node',str(root/'scripts/check_renderer.mjs')],cwd=root,check=True)

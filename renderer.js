@@ -25,7 +25,7 @@ export function createRenderer(atlas){
  if(gl){try{program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,`#version 300 es
  void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);gl_Position=vec4(p*2.0-1.0,0.0,1.0);}`));
  gl.attachShader(program,shader(gl.FRAGMENT_SHADER,`#version 300 es
-      precision highp float; precision highp int; precision highp usampler2D;
+      precision highp float; precision highp int; precision highp usampler2D; precision highp sampler2D;
       uniform vec2 uSize;uniform float uRadius;uniform mat3 uCamera;uniform usampler2D uAtlas;
       uniform int uCount,uPieces;uniform vec3 uAxes[${axisCapacity}],uInk;
       uniform usampler2D uMasks;uniform sampler2D uColors,uSeeds;

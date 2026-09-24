@@ -106,16 +106,19 @@ def joined_components(U,h,probes,lab,labels,mask,margin,expected):
         for ii,j in enumerate(ids):
             for k in ids[:ii]:
                 if find(j)==find(k):continue
-                p,q=points[j],points[k];c=np.clip(p@q,-1,1);theta=math.acos(c)
-                if theta<1e-9:parent[find(j)]=find(k);continue
-                if abs(math.sin(theta))<1e-10:continue
-                tangent=(q-c*p)/math.sin(theta);aa=U@p;bb=U@tangent;end=U@q
+                p,q=points[j],points[k];c=np.clip(p@q,-1,1);normal=np.cross(p,q);sine=np.linalg.norm(normal);theta=math.atan2(sine,c)
+                if theta<1e-9:
+                    if np.min(np.abs(U@p-h))>np.linalg.norm(p-q)+1e-10:parent[find(j)]=find(k)
+                    continue
+                if sine<1e-10:continue
+                # Cross products avoid cancellation for almost equal seeds.
+                tangent=np.cross(normal,p)/sine;aa=U@p;bb=U@tangent;end=U@q
                 lo=np.minimum(aa,end);hi=np.maximum(aa,end);phase=np.arctan2(bb,aa)%(2*np.pi);magnitude=np.hypot(aa,bb)
                 hi=np.where(phase<=theta,np.maximum(hi,magnitude),hi);phase=(phase+np.pi)%(2*np.pi)
                 lo=np.where(phase<=theta,np.minimum(lo,-magnitude),lo)
                 # Touching a boundary is insufficient: two different open
                 # pieces can meet at a tangent point without being joined.
-                if all(lo[i]>h+1e-12 if m&(1<<i) else hi[i]<h-1e-12 for i in range(len(U))):parent[find(j)]=find(k)
+                if all(lo[i]>h+1e-10 if m&(1<<i) else hi[i]<h-1e-10 for i in range(len(U))):parent[find(j)]=find(k)
     groups={}
     for i in range(len(points)):groups.setdefault(find(i),[]).append(i)
     if len(groups)!=expected:
@@ -135,27 +138,30 @@ def joined_components(U,h,probes,lab,labels,mask,margin,expected):
     return out,records,len(fullaxes)
 
 def atlas(U,alpha,expected):
+    if len(U)>30:raise ValueError('The current renderer supports at most 30 original directed axes.')
     h=math.cos(math.radians(alpha));dots=[];mask=np.zeros((H,W),np.uint32);boundary=np.zeros((H,W),bool)
     margin=np.full((H,W),10.)
     if alpha==0:
         out=np.ones((H,W),np.uint8)
         return out,[dict(mask=0,seed=[0,0,1],area=1,members=[])],len(U)
+    probes=boundary_seeds(U,alpha);analytic={}
+    for p in probes:
+        m=sum(1<<i for i,d in enumerate(U@p) if d>h)
+        clearance=float(np.min(np.abs(U@p-h)))
+        if m not in analytic or clearance>analytic[m][1]:analytic[m]=(p,clearance)
+    distinct=len(analytic)==expected
     horizontal=np.ones((H,W),bool);vertical=np.ones((H-1,W),bool)
     for i,u in enumerate(U):
         d=u[0]*X+u[1]*Y+u[2]*Z
         mask|=((d>h).astype(np.uint32)<<i)
         boundary|=np.abs(d-h)<1e-11
         margin=np.minimum(margin,np.abs(np.arccos(np.clip(d,-1,1))-math.radians(alpha)))
-        horizontal&=~connectivity_block(d,np.roll(d,-1,axis=1),ch,h)
-        vertical&=~connectivity_block(d[:-1],d[1:],cv,h)
-    probes=boundary_seeds(U,alpha);analytic={}
-    for p in probes:
-        m=sum(1<<i for i,d in enumerate(U@p) if d>h)
-        clearance=float(np.min(np.abs(U@p-h)))
-        if m not in analytic or clearance>analytic[m][1]:analytic[m]=(p,clearance)
+        if not distinct:
+            horizontal&=~connectivity_block(d,np.roll(d,-1,axis=1),ch,h)
+            vertical&=~connectivity_block(d[:-1],d[1:],cv,h)
     # Every region meets an open cut arc. If its signature count equals the
     # analytic region count, each signature is exactly one connected piece.
-    if len(analytic)==expected:
+    if distinct:
         fullaxes=list(U)
         if alpha==90:
             for u in U:
@@ -209,6 +215,9 @@ def atlas(U,alpha,expected):
     return out,records,len(fullaxes)
 
 def main():
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--refresh-file',type=Path);args=parser.parse_args()
+    refresh={(key,round(angle,7)) for key,angle in json.loads(args.refresh_file.read_text())} if args.refresh_file else set()
     names={'one':'Single ray','opposite':'Antipodal pair','ring3':'Triangular ring','ring4':'Square ring','tetra':'Tetrahedral axes','ring5':'Pentagonal ring','bipyramid3':'Triangle + poles','ring6':'Hexagonal ring','bipyramid4':'Octahedral axes','ring7':'Heptagonal ring','bipyramid5':'Pentagon + poles','jumble':'Jumbling example (60° apart)'}
     raw={x['name']:x for x in json.load(open('data/configurations.json'))}
     raw['jumble']=dict(axes=[[1,0,0],[.5,math.sqrt(3)/2,0],[.5,1/(2*math.sqrt(3)),math.sqrt(2/3)]],angles=[30,math.degrees(math.acos(math.sqrt(2/3)))],spherical_regions=[4,8,8])
@@ -232,7 +241,8 @@ def main():
             a=info['angle'];expected=info.pop('expected')
             assert exact_regions(U,a)==expected,(key,a,expected,exact_regions(U,a))
             cached=cache.get((key,info['kind'],round(a,7)))
-            if cached and np.max(np.abs(np.array(cached[0])-U))<1e-8 and cached[1]['count']==expected:
+            reused=cached and (key,round(a,7)) not in refresh and np.max(np.abs(np.array(cached[0])-U))<1e-8 and cached[1]['count']==expected
+            if reused:
                 info.update({k:cached[1][k] for k in ['count','pieces','rays','data','width','height','labelBytes'] if k in cached[1]});size=len(base64.b64decode(info['data']))
             else:
                 if W!=2048:set_grid(2048)
@@ -244,7 +254,7 @@ def main():
                 compressed=gzip.compress(pixels.tobytes(),compresslevel=9,mtime=0);size=len(compressed)
                 info.update(count=len(pieces),pieces=pieces,rays=rays,data=base64.b64encode(compressed).decode())
             family['variants'].append(info);total+=1
-            Path('work/sphere_atlas.partial.json').write_text(json.dumps(dict(width=2048,height=1024,families=result['families']+[family]),separators=(',',':')))
+            if not reused:Path('work/sphere_atlas.partial.json').write_text(json.dumps(dict(width=2048,height=1024,families=result['families']+[family]),separators=(',',':')))
             print(f'{total:02d} {key:12s} {info["kind"]:10s} {a:9.5f}° {info["count"]:2d} pieces {size:6d} bytes {time.time()-start:.1f}s',flush=True)
         result['families'].append(family)
         Path('work/sphere_atlas.partial.json').write_text(json.dumps(result,separators=(',',':')))

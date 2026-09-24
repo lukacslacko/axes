@@ -4,9 +4,9 @@
 
 An interactive mathematical catalogue of conical twisty puzzles. All configurations and depths appear on one scrollable page, with jump navigation and an independently rotatable sphere for every case. Pieces share a color when legal turns can carry a whole piece into another piece's angular-sector position.
 
-- **34 standard axis configurations** with at most **16 directed rays**.
-- **218 open cut-arrangement regimes**, their critical depths, and both endpoints.
-- The three-axis jumbling and eight-axis gyrobifastigium examples, giving **500 sphere views** in total.
+- **45 standard axis configurations** with at most **20 directed rays**.
+- **375 open cut-arrangement regimes**, their critical depths, and both endpoints.
+- The three-axis jumbling and eight-axis gyrobifastigium examples, giving **825 sphere views** in total.
 - Whole-sector reachability colors, class highlighting, axis labels, and optional piece IDs.
 - Mouse/touch rotation, arrow buttons and keyboard controls, and automatic light/dark appearance.
 
@@ -14,7 +14,7 @@ This is a finite catalogue under the **global axis-symmetry rule**, not a classi
 
 For the gyrobifastigium and elongated square gyrobicupola, see [the local constructions and their continuous deformation](docs/local-constructions.md).
 
-The axis/depth enumeration is complete through the stated bound. **Full reachability remains unresolved in 43 marked cases**; their shared colors are verified and their class counts are displayed as bounds.
+The axis/depth enumeration is complete through the stated bound. **Full reachability remains unresolved in 157 marked cases**; their shared colors are verified and their class counts are displayed as bounds.
 
 See [the current catalogue and completeness argument](docs/catalogue.md), [the mathematical model](docs/model.md) and [the reachability calculation](docs/reachability.md).
 
@@ -49,6 +49,7 @@ To validate the shipped data alone:
 python3 scripts/validate.py
 node --check app.js
 node --check renderer.js
+node scripts/check_renderer.mjs
 ```
 
 The renderer shares **one WebGL context** between every card. Every card has a pre-rendered mathematical preview and its own camera; live canvas buffers are retained only near the viewport, and the decompressed atlas cache is bounded to 64 MiB. A small manifest loads first, followed by individual sphere data near the viewport. No third-party rendering library is used.
